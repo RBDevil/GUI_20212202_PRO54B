@@ -90,8 +90,7 @@ namespace Game.Logic
         void InitPlayer()
         {
             Player = new Player(
-                new Vector2(200, 300),
-                40, 20);
+                new Vector2(200, 300));
         }
 
         void InitMapObjects()
