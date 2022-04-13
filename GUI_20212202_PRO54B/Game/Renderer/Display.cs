@@ -23,6 +23,10 @@ namespace Game.Renderer
             base.OnRender(drawingContext);
             if (logic != null)
             {
+                foreach (var item in logic.BackgroundObjects)
+                {
+                    item.Render(drawingContext);
+                }
                 // render all the objects on the map
                 foreach (var item in logic.MapObjects)
                 {

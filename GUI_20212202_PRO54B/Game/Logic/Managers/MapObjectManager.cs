@@ -16,10 +16,10 @@ namespace Game.Logic.Managers
         // at what remaining number of objects will generate new objects
         const int GENERATION_LIMIT = 15;
         
-        public static void Update(List<MapObject> mapObjects)
+        public static void Update(List<MapObject> mapObjects, List<MapObject> backgroundObjects)
         {
-            DeleteObjects(mapObjects);
-            GenerateObjects(mapObjects);
+            DeleteObjects(mapObjects, backgroundObjects);
+            GenerateObjects(mapObjects, backgroundObjects);
         }
 
         static Size windowSize;
@@ -30,8 +30,13 @@ namespace Game.Logic.Managers
             ObjectsToRemove = new List<MapObject>();
         }
 
-        static void GenerateObjects(List<MapObject> mapObjects)
+        static void GenerateObjects(List<MapObject> mapObjects, List<MapObject> backgroundObjects)
         {
+            if (backgroundObjects.Count < 3)
+            {
+                backgroundObjects.AddRange(MapObjectGenerator.GenerateBackground(backgroundObjects));
+            }
+
             if (mapObjects.Count < GENERATION_LIMIT)
             {
                 mapObjects.AddRange(MapObjectGenerator.Generate(windowSize));
@@ -41,14 +46,24 @@ namespace Game.Logic.Managers
         /// <summary>
         /// Deletes mapObjects that are no longer needed, past or picked up by the player
         /// </summary>
-        static void DeleteObjects(List<MapObject> mapObjects)
+        static void DeleteObjects(List<MapObject> mapObjects, List<MapObject> backgroundObjects)
         {
             // collect objects to remove
             foreach (var item in mapObjects)
             {
-                if (item.Position.Y > windowSize.Height - 100)
+                if (item.Position.Y > windowSize.Height)
                 {
                     ObjectsToRemove.Add(item);
+                }
+            }
+
+            List<MapObject> backgroundsToRemove = new List<MapObject>();
+
+            foreach (var item in backgroundObjects)
+            {
+                if (item.Position.Y > windowSize.Height)
+                {
+                    backgroundsToRemove.Add(item);
                 }
             }
 
@@ -56,6 +71,11 @@ namespace Game.Logic.Managers
             foreach (var item in ObjectsToRemove)
             {
                 mapObjects.Remove(item);
+            }
+
+            foreach (var item in backgroundsToRemove)
+            {
+                backgroundObjects.Remove(item);
             }
 
             ObjectsToRemove.Clear();

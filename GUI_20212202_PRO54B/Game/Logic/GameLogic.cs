@@ -24,6 +24,7 @@ namespace Game.Logic
         public event GameEventHandler GameOver;
 
         public List<MapObject> MapObjects { get; private set; }
+        public List<MapObject> BackgroundObjects { get; private set; }
         public Player Player { get; private set; }
 
         bool gameOver = false;
@@ -56,16 +57,19 @@ namespace Game.Logic
 
         public void Update()
         {
+            List<MapObject> allMapObjects = new List<MapObject>(MapObjects);
+            allMapObjects.AddRange(BackgroundObjects);
+
             if (!gameOver)
             {
                 Player.Update(Player.Speed);
-                foreach (var item in MapObjects)
+                foreach (var item in allMapObjects)
                 {
                     item.Update(Player.Speed);
                 }
 
                 CollisionManager.Update(Player, MapObjects);
-                MapObjectManager.Update(MapObjects);
+                MapObjectManager.Update(MapObjects, BackgroundObjects);
             }
         }
 
@@ -93,6 +97,8 @@ namespace Game.Logic
         void InitMapObjects()
         {
             MapObjects = new List<MapObject>();
+            BackgroundObjects = new List<MapObject>();
+            BackgroundObjects.Add(new Background(new Vector2(0, 0)));
         }
     }
 }

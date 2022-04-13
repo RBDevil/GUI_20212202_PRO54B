@@ -41,5 +41,17 @@ namespace Game.Logic.Managers
 
             return mapObjects;
         }
+
+        public static List<MapObject> GenerateBackground(List<MapObject> backgroundObjects)
+        {
+            List<MapObject> newBackgrounds = new List<MapObject>();
+
+            // gets next background generation position's y value
+            float yCoord = backgroundObjects.Max(x => x.Position.Y) - backgroundObjects[0].Height;
+
+            newBackgrounds.Add(new Background(new Vector2(0, yCoord)));
+
+            return newBackgrounds;
+        }
     }
 }
