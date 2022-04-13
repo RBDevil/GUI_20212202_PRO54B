@@ -42,6 +42,7 @@ namespace Game
 
         private void Dt_Tick(object sender, EventArgs e)
         {
+            logic.Update();
             display.InvalidateVisual();
         }
 

@@ -13,6 +13,7 @@ namespace Game.Logic
         List<MapObject> MapObjects { get; }
         Player Player { get; }
 
+        void Update();
         void PlayerControl(Controls control);
     }
 }

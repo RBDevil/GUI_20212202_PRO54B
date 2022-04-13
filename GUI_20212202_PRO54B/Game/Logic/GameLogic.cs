@@ -23,16 +23,22 @@ namespace Game.Logic
 
         public GameLogic()
         {
-            MapObjects = new List<MapObject>();
-            AddPlayer();
+            InitMapObjects();
+            InitPlayer();
         }
 
-        void AddPlayer()
+        void InitPlayer()
         {
             Player = new Player(
-                new Vector2(0,0),
+                new Vector2(200, 300),
                 40, 20,
                 new SolidColorBrush(Color.FromRgb(100,100,100)));
+        }
+
+        void InitMapObjects()
+        {
+            MapObjects = new List<MapObject>();
+            MapObjects.Add(new Car(new Vector2(200, 0), 40, 40, new SolidColorBrush(Color.FromRgb(0, 200, 0))));
         }
 
         public void PlayerControl(Controls control)
@@ -47,6 +53,15 @@ namespace Game.Logic
                     break;
                 default:
                     break;
+            }
+        }
+
+        public void Update()
+        {
+            Player.Update();
+            foreach (var item in MapObjects)
+            {
+                item.Update();
             }
         }
     }

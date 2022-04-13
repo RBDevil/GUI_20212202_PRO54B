@@ -30,5 +30,9 @@ namespace Game.Logic.MapObjects
             // update rect
             Rect = new Rect(Position.X, Position.Y, Widht, Height);
         }
+        public override void Update()
+        {
+
+        }
     }
 }
