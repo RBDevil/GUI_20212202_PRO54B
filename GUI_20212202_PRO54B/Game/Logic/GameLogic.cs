@@ -38,16 +38,19 @@ namespace Game.Logic
 
         public void PlayerControl(Controls control)
         {
-            switch (control)
+            if (!gameOver)
             {
-                case Controls.Right:
-                    Player.MoveRight();
-                    break;
-                case Controls.Left:
-                    Player.MoveLeft();
-                    break;
-                default:
-                    break;
+                switch (control)
+                {
+                    case Controls.Right:
+                        Player.MoveRight();
+                        break;
+                    case Controls.Left:
+                        Player.MoveLeft();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -61,7 +64,6 @@ namespace Game.Logic
                     item.Update(Player.Speed);
                 }
 
-
                 CollisionManager.Update(Player, MapObjects);
                 MapObjectManager.Update(MapObjects);
             }
@@ -69,8 +71,16 @@ namespace Game.Logic
 
         void OnCollision(CollisionEventArgs eargs)
         {
-            gameOver = true;
-            GameOver?.Invoke();
+            Coin coin = eargs.CollisionWith as Coin;
+            if (coin != null)
+            {
+                MapObjectManager.ObjectsToRemove.Add(coin);
+            }
+            else
+            {
+                gameOver = true;
+                GameOver?.Invoke();
+            }
         }
 
         void InitPlayer()

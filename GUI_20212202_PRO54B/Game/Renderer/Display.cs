@@ -26,10 +26,10 @@ namespace Game.Renderer
                 // render all the objects on the map
                 foreach (var item in logic.MapObjects)
                 {
-                    drawingContext.DrawRectangle(item.Brush, null, item.Rect);
+                    item.Render(drawingContext);
                 }
                 // render player
-                drawingContext.DrawRectangle(logic.Player.Brush, null, logic.Player.Rect);
+                logic.Player.Render(drawingContext);
             }
         }
     }

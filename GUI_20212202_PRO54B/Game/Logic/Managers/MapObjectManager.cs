@@ -10,8 +10,12 @@ namespace Game.Logic.Managers
 {
     static class MapObjectManager
     {
+        // typically coins and power-ups that the plyaer collided with and will have to be removed
+        public static List<MapObject> ObjectsToRemove { get; private set; }
+
         // at what remaining number of objects will generate new objects
         const int GENERATION_LIMIT = 15;
+        
         public static void Update(List<MapObject> mapObjects)
         {
             DeleteObjects(mapObjects);
@@ -23,6 +27,7 @@ namespace Game.Logic.Managers
         public static void Init(Size windowSize)
         {
             MapObjectManager.windowSize = windowSize;
+            ObjectsToRemove = new List<MapObject>();
         }
 
         static void GenerateObjects(List<MapObject> mapObjects)
@@ -39,20 +44,21 @@ namespace Game.Logic.Managers
         static void DeleteObjects(List<MapObject> mapObjects)
         {
             // collect objects to remove
-            List<MapObject> toRemove = new List<MapObject>();
             foreach (var item in mapObjects)
             {
                 if (item.Position.Y > windowSize.Height - 100)
                 {
-                    toRemove.Add(item);
+                    ObjectsToRemove.Add(item);
                 }
             }
 
             // actually remove them
-            foreach (var item in toRemove)
+            foreach (var item in ObjectsToRemove)
             {
                 mapObjects.Remove(item);
             }
+
+            ObjectsToRemove.Clear();
         }
     }
 }

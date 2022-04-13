@@ -11,6 +11,7 @@ namespace Game.Logic
     public interface IGameLogic
     {
         List<MapObject> MapObjects { get; }
+
         Player Player { get; }
 
         void Update();

@@ -26,10 +26,17 @@ namespace Game.Logic.Managers
 
             for (int i = 0; i < GENERATE_NUMBER; i++)
             {
-                mapObjects.Add(new Car(
-                    new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), 
-                    rnd.Next(MIN_WIDHT, MAX_WIDHT),
-                    rnd.Next(MIN_HEIGHT, MAX_HEIGHT)));
+                if (rnd.Next(0, 100) > 5)
+                {
+                    mapObjects.Add(new Car(
+                        new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)),
+                        rnd.Next(MIN_WIDHT, MAX_WIDHT),
+                        rnd.Next(MIN_HEIGHT, MAX_HEIGHT)));
+                }
+                else
+                {
+                    mapObjects.Add(new Coin(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100))));
+                }
             }
 
             return mapObjects;

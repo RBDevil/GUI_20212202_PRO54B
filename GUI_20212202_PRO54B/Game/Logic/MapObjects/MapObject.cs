@@ -9,13 +9,12 @@ using System.Windows.Media;
 
 namespace Game.Logic.MapObjects
 {
-    // This is any kind of object on the map that has to be rendered, and checked by the collision manager
-    public abstract class MapObject
+    // This is any kind of object on the map that has to be rendered
+    public abstract class MapObject : IRenderable
     {
         public Vector2 Position { get; protected set; }
         public int Height { get; protected set; }
         public int Widht { get; protected set; }
-        public Rect Rect { get; protected set; }
         public Brush Brush { get; protected set; }
 
         static Random rnd = new Random();
@@ -30,8 +29,6 @@ namespace Game.Logic.MapObjects
                 Color.FromRgb((byte)rnd.Next(0, 256), 
                 (byte)rnd.Next(0, 256), 
                 (byte)rnd.Next(0, 256)));
-
-            Rect = new Rect(Position.X, Position.Y, Widht, Height);
         }
 
         public virtual void Update(float playerSpeed)
@@ -39,8 +36,7 @@ namespace Game.Logic.MapObjects
             // everything except the player moves
             // update position
             Position += new Vector2(0, playerSpeed);
-            // update rect
-            Rect = new Rect(Position.X, Position.Y, Widht, Height);
         }
+        public abstract void Render(DrawingContext drawingContext);
     }
 }

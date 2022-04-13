@@ -9,16 +9,18 @@ using System.Windows.Media;
 
 namespace Game.Logic.MapObjects
 {
-    public class Player : MapObject
+    public class Player : MapObject, ICollidable
     {
         public float Speed { get; private set; }
+        public Rect Rect { get; private set; }
 
         const float TURNING_SPEED = 2f;
 
-        public Player(Vector2 position, int widht, int height) 
+        public Player(Vector2 position, int widht, int height)
             : base(position, widht, height)
         {
             Speed = 2f;
+            Rect = new Rect(Position.X, Position.Y, Widht, Height);
         }
 
         public void MoveRight()
@@ -40,6 +42,11 @@ namespace Game.Logic.MapObjects
         public override void Update(float playerSpeed)
         {
             // do NOT call base method
+        }
+
+        public override void Render(DrawingContext drawingContext)
+        {
+            drawingContext.DrawRectangle(Brush, null, Rect);
         }
     }
 }

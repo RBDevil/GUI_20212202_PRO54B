@@ -9,12 +9,12 @@ namespace Game.Logic.Managers
 {
     class CollisionEventArgs
     {
-        public MapObject MapObject { get; set; }
-        public MapObject CollisionWith { get; set; }
+        public Player Player { get; set; }
+        public ICollidable CollisionWith { get; set; }
 
-        public CollisionEventArgs(MapObject mapObject, MapObject collisionWith)
+        public CollisionEventArgs(Player player, ICollidable collisionWith)
         {
-            MapObject = mapObject;
+            Player = player;
             CollisionWith = collisionWith;
         }
     }
@@ -32,9 +32,13 @@ namespace Game.Logic.Managers
         {
             foreach (var item in mapObjects)
             {
-                if(player.Rect.IntersectsWith(item.Rect))
+                ICollidable collidableItem = item as ICollidable;
+                if (collidableItem != null)
                 {
-                    Collision?.Invoke(new CollisionEventArgs(player, item));
+                    if (player.Rect.IntersectsWith(collidableItem.Rect))
+                    {
+                        Collision?.Invoke(new CollisionEventArgs(player, collidableItem));
+                    }
                 }
             }
         }
