@@ -1,6 +1,7 @@
 ﻿using Game.Logic.MapObjects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -25,20 +26,7 @@ namespace Game.Logic
         {
             InitMapObjects();
             InitPlayer();
-        }
-
-        void InitPlayer()
-        {
-            Player = new Player(
-                new Vector2(200, 300),
-                40, 20,
-                new SolidColorBrush(Color.FromRgb(100,100,100)));
-        }
-
-        void InitMapObjects()
-        {
-            MapObjects = new List<MapObject>();
-            MapObjects.Add(new Car(new Vector2(200, 0), 40, 40, new SolidColorBrush(Color.FromRgb(0, 200, 0))));
+            CollisionManager.Collision += OnCollision; ;
         }
 
         public void PlayerControl(Controls control)
@@ -63,6 +51,27 @@ namespace Game.Logic
             {
                 item.Update();
             }
+
+            CollisionManager.Update(Player, MapObjects);
+        }
+
+        void OnCollision(CollisionEventArgs eargs)
+        {
+            Debug.WriteLine("Collision: " + eargs.CollisionWith.ToString());
+        }
+
+        void InitPlayer()
+        {
+            Player = new Player(
+                new Vector2(200, 300),
+                40, 20,
+                new SolidColorBrush(Color.FromRgb(100, 100, 100)));
+        }
+
+        void InitMapObjects()
+        {
+            MapObjects = new List<MapObject>();
+            MapObjects.Add(new Car(new Vector2(200, 0), 40, 40, new SolidColorBrush(Color.FromRgb(0, 200, 0))));
         }
     }
 }
