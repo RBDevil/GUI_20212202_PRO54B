@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Game.Logic.MapObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Game.Logic
 {
@@ -15,18 +18,32 @@ namespace Game.Logic
 
     class GameLogic : IGameLogic
     {
-        public Vector Position { get { return position; } }
-        Vector position;
+        public List<MapObject> MapObjects { get; private set; }
+        public Player Player { get; private set; }
 
-        public void Control(Controls control)
+        public GameLogic()
+        {
+            MapObjects = new List<MapObject>();
+            AddPlayer();
+        }
+
+        void AddPlayer()
+        {
+            Player = new Player(
+                new Vector2(0,0),
+                40, 20,
+                new SolidColorBrush(Color.FromRgb(100,100,100)));
+        }
+
+        public void PlayerControl(Controls control)
         {
             switch (control)
             {
                 case Controls.Right:
-                    position.X += 1;
+                    Player.MoveRight();
                     break;
                 case Controls.Left:
-                    position.X -= 1;
+                    Player.MoveLeft();
                     break;
                 default:
                     break;

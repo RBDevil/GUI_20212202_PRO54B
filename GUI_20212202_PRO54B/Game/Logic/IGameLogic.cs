@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Logic.MapObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,9 @@ namespace Game.Logic
 {
     public interface IGameLogic
     {
-        Vector Position { get; }
+        List<MapObject> MapObjects { get; }
+        Player Player { get; }
 
-        void Control(Controls control);
+        void PlayerControl(Controls control);
     }
 }

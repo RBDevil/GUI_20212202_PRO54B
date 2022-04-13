@@ -50,10 +50,10 @@ namespace Game
             switch (e.Key)
             {
                 case Key.Right:
-                    logic.Control(Controls.Right);
+                    logic.PlayerControl(Controls.Right);
                     break;
                 case Key.Left:
-                    logic.Control(Controls.Left);
+                    logic.PlayerControl(Controls.Left);
                     break;
             }
         }

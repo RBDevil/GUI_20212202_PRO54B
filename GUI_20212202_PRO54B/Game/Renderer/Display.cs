@@ -13,8 +13,6 @@ namespace Game.Renderer
     {
         IGameLogic logic;
 
-        Brush carBrush = new SolidColorBrush(Color.FromRgb(100, 100, 100));
-
         public void SetupLogic(IGameLogic logic)
         {
             this.logic = logic;
@@ -25,7 +23,13 @@ namespace Game.Renderer
             base.OnRender(drawingContext);
             if (logic != null)
             {
-                drawingContext.DrawRectangle(Brushes.Red, null, new Rect(logic.Position.X, logic.Position.Y, 10, 40));
+                // render all the objects on the map
+                foreach (var item in logic.MapObjects)
+                {
+                    drawingContext.DrawRectangle(item.Brush, null, item.Rect);
+                }
+                // render player
+                drawingContext.DrawRectangle(logic.Player.Brush, null, logic.Player.Rect);
             }
         }
     }
