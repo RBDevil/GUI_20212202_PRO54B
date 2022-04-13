@@ -9,7 +9,7 @@ using System.Windows.Media;
 
 namespace Game.Logic.MapObjects
 {
-    // This is any kind of object on the map
+    // This is any kind of object on the map that has to be rendered, and checked by the collision manager
     public abstract class MapObject
     {
         public Vector2 Position { get; protected set; }
@@ -18,12 +18,18 @@ namespace Game.Logic.MapObjects
         public Rect Rect { get; protected set; }
         public Brush Brush { get; protected set; }
 
-        protected MapObject(Vector2 position, int height, int widht, Brush brush)
+        static Random rnd = new Random();
+
+        protected MapObject(Vector2 position, int height, int widht)
         {
             Position = position;
             Height = height;
             Widht = widht;
-            Brush = brush;
+
+            Brush = new SolidColorBrush(
+                Color.FromRgb((byte)rnd.Next(0, 256), 
+                (byte)rnd.Next(0, 256), 
+                (byte)rnd.Next(0, 256)));
 
             Rect = new Rect(Position.X, Position.Y, Widht, Height);
         }

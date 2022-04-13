@@ -27,11 +27,12 @@ namespace Game
         public MainWindow()
         {
             InitializeComponent();
+            window.ResizeMode = ResizeMode.NoResize;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            logic = new GameLogic();
+            logic = new GameLogic(window.RenderSize);
             display.SetupLogic(logic);
 
             DispatcherTimer dt = new DispatcherTimer();

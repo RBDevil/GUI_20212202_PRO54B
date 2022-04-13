@@ -11,8 +11,8 @@ namespace Game.Logic.MapObjects
 {
     public class Player : MapObject
     {
-        public Player(Vector2 position, int widht, int height, Brush brush) 
-            : base(position, widht, height, brush)
+        public Player(Vector2 position, int widht, int height) 
+            : base(position, widht, height)
         {
         }
 

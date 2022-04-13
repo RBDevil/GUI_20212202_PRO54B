@@ -1,4 +1,5 @@
-﻿using Game.Logic.MapObjects;
+﻿using Game.Logic.Managers;
+using Game.Logic.MapObjects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,11 +23,12 @@ namespace Game.Logic
         public List<MapObject> MapObjects { get; private set; }
         public Player Player { get; private set; }
 
-        public GameLogic()
+        public GameLogic(Size windowSize)
         {
             InitMapObjects();
             InitPlayer();
-            CollisionManager.Collision += OnCollision; ;
+            CollisionManager.Collision += OnCollision;
+            MapObjectManager.Init(windowSize);
         }
 
         public void PlayerControl(Controls control)
@@ -53,6 +55,7 @@ namespace Game.Logic
             }
 
             CollisionManager.Update(Player, MapObjects);
+            MapObjectManager.Update(MapObjects);
         }
 
         void OnCollision(CollisionEventArgs eargs)
@@ -64,14 +67,13 @@ namespace Game.Logic
         {
             Player = new Player(
                 new Vector2(200, 300),
-                40, 20,
-                new SolidColorBrush(Color.FromRgb(100, 100, 100)));
+                40, 20);
         }
 
         void InitMapObjects()
         {
             MapObjects = new List<MapObject>();
-            MapObjects.Add(new Car(new Vector2(200, 0), 40, 40, new SolidColorBrush(Color.FromRgb(0, 200, 0))));
+            MapObjects.Add(new Car(new Vector2(200, 0), 40, 40));
         }
     }
 }

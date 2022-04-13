@@ -11,8 +11,8 @@ namespace Game.Logic.MapObjects
 {
     class Car : MapObject
     {
-        public Car(Vector2 position, int widht, int height, Brush brush) 
-            : base(position, widht, height, brush)
+        public Car(Vector2 position, int widht, int height) 
+            : base(position, widht, height)
         {
         }
     }

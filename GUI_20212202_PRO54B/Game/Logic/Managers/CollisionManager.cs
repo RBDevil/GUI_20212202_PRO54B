@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game.Logic
+namespace Game.Logic.Managers
 {
     class CollisionEventArgs
     {
