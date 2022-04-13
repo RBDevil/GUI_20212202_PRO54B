@@ -18,6 +18,7 @@ namespace Game.Logic.Managers
         const int MIN_HEIGHT = 10;
         const int MAX_WIDHT = 60;
         const int MAX_HEIGHT = 20;
+        const int SPREAD = 1000;
 
         public static List<MapObject> Generate(Size windowSize)
         {
@@ -26,7 +27,7 @@ namespace Game.Logic.Managers
             for (int i = 0; i < GENERATE_NUMBER; i++)
             {
                 mapObjects.Add(new Car(
-                    new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-300, -100)), 
+                    new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), 
                     rnd.Next(MIN_WIDHT, MAX_WIDHT),
                     rnd.Next(MIN_HEIGHT, MAX_HEIGHT)));
             }

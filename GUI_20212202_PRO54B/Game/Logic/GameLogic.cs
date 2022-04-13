@@ -20,8 +20,13 @@ namespace Game.Logic
 
     class GameLogic : IGameLogic
     {
+        public delegate void GameEventHandler();
+        public event GameEventHandler GameOver;
+
         public List<MapObject> MapObjects { get; private set; }
         public Player Player { get; private set; }
+
+        bool gameOver = false;
 
         public GameLogic(Size windowSize)
         {
@@ -48,19 +53,24 @@ namespace Game.Logic
 
         public void Update()
         {
-            Player.Update();
-            foreach (var item in MapObjects)
+            if (!gameOver)
             {
-                item.Update();
-            }
+                Player.Update(Player.Speed);
+                foreach (var item in MapObjects)
+                {
+                    item.Update(Player.Speed);
+                }
 
-            CollisionManager.Update(Player, MapObjects);
-            MapObjectManager.Update(MapObjects);
+
+                CollisionManager.Update(Player, MapObjects);
+                MapObjectManager.Update(MapObjects);
+            }
         }
 
         void OnCollision(CollisionEventArgs eargs)
         {
-            Debug.WriteLine("Collision: " + eargs.CollisionWith.ToString());
+            gameOver = true;
+            GameOver?.Invoke();
         }
 
         void InitPlayer()
@@ -73,7 +83,6 @@ namespace Game.Logic
         void InitMapObjects()
         {
             MapObjects = new List<MapObject>();
-            MapObjects.Add(new Car(new Vector2(200, 0), 40, 40));
         }
     }
 }

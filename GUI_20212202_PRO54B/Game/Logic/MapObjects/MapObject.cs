@@ -34,11 +34,11 @@ namespace Game.Logic.MapObjects
             Rect = new Rect(Position.X, Position.Y, Widht, Height);
         }
 
-        public virtual void Update()
+        public virtual void Update(float playerSpeed)
         {
             // everything except the player moves
             // update position
-            Position += new Vector2(0, 1);
+            Position += new Vector2(0, playerSpeed);
             // update rect
             Rect = new Rect(Position.X, Position.Y, Widht, Height);
         }
