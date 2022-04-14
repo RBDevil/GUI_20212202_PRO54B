@@ -10,7 +10,9 @@ namespace Game.Logic.Managers
 {
     static class MapObjectManager
     {
-        // typically coins and power-ups that the plyaer collided with and will have to be removed
+        /// <summary>
+        /// Typically coins and power-ups that the player collided with and will have to be removed
+        /// </summary>
         public static List<MapObject> ObjectsToRemove { get; private set; }
 
         // at what remaining number of objects will generate new objects
@@ -30,6 +32,7 @@ namespace Game.Logic.Managers
             ObjectsToRemove = new List<MapObject>();
         }
 
+        // Generation algorithm is temporary
         static void GenerateObjects(List<MapObject> mapObjects)
         {
             if (mapObjects.Count < GENERATION_LIMIT)

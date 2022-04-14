@@ -9,7 +9,9 @@ using System.Windows.Media;
 
 namespace Game.Logic.MapObjects
 {
-    // This is any kind of object on the map that has to be rendered
+    /// <summary>
+    /// This is any kind of object on the map that has to be rendered
+    /// </summary>
     public abstract class MapObject : IRenderable
     {
         public Vector2 Position { get; protected set; }

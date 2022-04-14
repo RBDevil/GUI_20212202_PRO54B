@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace Game.Logic
 {
@@ -26,6 +27,8 @@ namespace Game.Logic
         public List<MapObject> MapObjects { get; private set; }
         public Player Player { get; private set; }
 
+        int score = 0;
+        int timer = 0;
         bool gameOver = false;
 
         public GameLogic(Size windowSize)
@@ -55,7 +58,7 @@ namespace Game.Logic
         }
 
         public void Update()
-        {
+        {            
             if (!gameOver)
             {
                 Player.Update(Player.Speed);
@@ -66,15 +69,21 @@ namespace Game.Logic
 
                 CollisionManager.Update(Player, MapObjects);
                 MapObjectManager.Update(MapObjects);
+
+                timer++;
+
+                if(timer % 500 == 0)
+                {
+                    Player.SpeedUp(0.5f);
+                }
             }
         }
 
         void OnCollision(CollisionEventArgs eargs)
         {
-            Coin coin = eargs.CollisionWith as Coin;
-            if (coin != null)
+            if (eargs.CollisionWith is Coin || eargs.CollisionWith is PowerUp)
             {
-                MapObjectManager.ObjectsToRemove.Add(coin);
+                MapObjectManager.ObjectsToRemove.Add((MapObject)eargs.CollisionWith);
             }
             else
             {

@@ -39,6 +39,11 @@ namespace Game.Logic.MapObjects
             Rect = new Rect(Position.X, Position.Y, Widht, Height);
         }
 
+        public void SpeedUp(float speed)
+        {
+            Speed += speed;
+        }
+
         public override void Update(float playerSpeed)
         {
             // do NOT call base method

@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using static Game.Logic.MapObjects.PowerUp;
 
 namespace Game.Logic.Managers
 {
@@ -26,16 +27,21 @@ namespace Game.Logic.Managers
 
             for (int i = 0; i < GENERATE_NUMBER; i++)
             {
-                if (rnd.Next(0, 100) > 5)
+                int num = rnd.Next(0, 100);
+                if (num > 10)
                 {
                     mapObjects.Add(new Car(
                         new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)),
                         rnd.Next(MIN_WIDHT, MAX_WIDHT),
                         rnd.Next(MIN_HEIGHT, MAX_HEIGHT)));
                 }
-                else
+                else if (num > 5)
                 {
                     mapObjects.Add(new Coin(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100))));
+                }
+                else
+                {
+                    mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.BonusHealth));
                 }
             }
 
