@@ -1,4 +1,5 @@
 ﻿using Game.Logic;
+using Game.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,22 +24,23 @@ namespace Game
     public partial class MainWindow : Window
     {
         GameLogic logic;
-
+        
         public MainWindow()
         {
             InitializeComponent();
+            Content = new MainMenu();
             window.ResizeMode = ResizeMode.NoResize;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            logic = new GameLogic(window.RenderSize);
-            display.SetupLogic(logic);
+            //logic = new GameLogic(window.RenderSize);
+            //display.SetupLogic(logic);
 
-            DispatcherTimer dt = new DispatcherTimer();
-            dt.Interval = TimeSpan.FromMilliseconds(1000 / 60);
-            dt.Tick += Dt_Tick;
-            dt.Start();
+            //DispatcherTimer dt = new DispatcherTimer();
+            //dt.Interval = TimeSpan.FromMilliseconds(1000 / 60);
+            //dt.Tick += Dt_Tick;
+            //dt.Start();
         }
 
         private void Dt_Tick(object sender, EventArgs e)
