@@ -9,12 +9,12 @@ namespace Game.Logic.Managers
 {
     class CollisionEventArgs
     {
-        public Player Player { get; set; }
+        public ICollidable MapObject { get; set; }
         public ICollidable CollisionWith { get; set; }
 
-        public CollisionEventArgs(Player player, ICollidable collisionWith)
+        public CollisionEventArgs(ICollidable mapObject, ICollidable collisionWith)
         {
-            Player = player;
+            MapObject = mapObject;
             CollisionWith = collisionWith;
         }
     }
@@ -24,22 +24,33 @@ namespace Game.Logic.Managers
         public delegate void CollisionEventHandler(CollisionEventArgs eargs);
         public static event CollisionEventHandler Collision;
 
-        /// <summary>
-        /// This method checks for PLAYER collision ONLY
-        /// </summary>
-        /// <param name="mapObjects"></param>
-        public static void Update(Player player, List<MapObject> mapObjects)
+        public static void Update(Player player, List<MapObject> mapObjects, List<Bullet> bullets)
         {
             foreach (var item in mapObjects)
             {
                 ICollidable collidableItem = item as ICollidable;
-                if (collidableItem != null && collidableItem is not Bullet)
+                if (collidableItem != null)
                 {
                     if (player.Rect.IntersectsWith(collidableItem.Rect))
                     {
                         Collision?.Invoke(new CollisionEventArgs(player, collidableItem));
                     }
                 }
+            }
+
+            foreach (var bullet in bullets)
+            {
+                foreach (var mapObject in mapObjects)
+                {
+                    ICollidable collidableItem = mapObject as ICollidable;
+                    if (collidableItem != null)
+                    {
+                        if (bullet.Rect.IntersectsWith(collidableItem.Rect)) 
+                        {
+                            Collision?.Invoke(new CollisionEventArgs(bullet, collidableItem));
+                        }
+                    }
+                } 
             }
         }
     }

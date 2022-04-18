@@ -41,7 +41,23 @@ namespace Game.Logic.Managers
                 }
                 else
                 {
-                    mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.Minigun));
+                    int num2 = rnd.Next(0, 100);
+                    if (num2 < 25)
+                    {
+                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.BonusHealth));
+                    }
+                    else if (num2 < 50)
+                    {
+                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.CoinMagnet));
+                    }
+                    else if (num2 < 75)
+                    {
+                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.PointMultiplier));
+                    }
+                    else
+                    {
+                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.Minigun));
+                    }
                 }
             }
 

@@ -32,12 +32,16 @@ namespace Game.Logic.MapObjects
             switch (type)
             {
                 case PowerUpType.CoinMagnet:
+                    Brush = new SolidColorBrush(Color.FromRgb(0, 255, 0));
                     break;
                 case PowerUpType.BonusHealth:
+                    Brush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
                     break;
                 case PowerUpType.Minigun:
+                    Brush = new SolidColorBrush(Color.FromRgb(0, 0, 255));
                     break;
                 case PowerUpType.PointMultiplier:
+                    Brush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
                     break;
             }
         }

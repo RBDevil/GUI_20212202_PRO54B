@@ -15,9 +15,9 @@ namespace Game.Logic.PowerUps
             LifeTime = 1;
         }
 
-        public override void Update(List<MapObject> mapObjects, Player player, ref int score)
+        public override void Update(List<MapObject> mapObjects, List<Bullet> bullets, Player player, ref int score)
         {
-            base.Update(mapObjects, player, ref score);
+            base.Update(mapObjects, bullets, player, ref score);
             player.Health += 1;
         }
     }

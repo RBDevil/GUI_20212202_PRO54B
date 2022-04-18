@@ -11,12 +11,14 @@ namespace Game.Logic.MapObjects
 {
     class Bullet : MapObject, ICollidable
     {
+        public int Damage { get; }
         public Rect Rect { get => new Rect(Position.X, Position.Y, Widht, Height); }
 
-        const float BULLET_SPEED = -1;
+        const float BULLET_SPEED = -6;
         
         public Bullet(Vector2 position) : base(position, 3, 3)
         {
+            Damage = 1;
         }
 
         public override void Render(DrawingContext drawingContext)

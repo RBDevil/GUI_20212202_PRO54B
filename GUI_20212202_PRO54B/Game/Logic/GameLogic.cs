@@ -28,9 +28,11 @@ namespace Game.Logic
 
         public const int SCORE_PER_SECOND = 1;
 
-        List<PickedUpPowerUp> powerUps = new List<PickedUpPowerUp>();
         public List<MapObject> MapObjects { get; private set; }
         public Player Player { get; private set; }
+
+        List<PickedUpPowerUp> powerUps = new List<PickedUpPowerUp>();
+        List<Bullet> bullets = new List<Bullet>();
 
         int score = 0;
         int timer = 0;
@@ -74,8 +76,13 @@ namespace Game.Logic
                     item.Update(Player.Speed);
                 }
 
-                CollisionChecker.Update(Player, MapObjects);
-                MapObjectManager.Update(MapObjects);
+                foreach (var item in bullets)
+                {
+                    item.Update(Player.Speed);
+                }
+
+                CollisionChecker.Update(Player, MapObjects, bullets);
+                MapObjectManager.Update(MapObjects, bullets);
 
                 UpdatePickedUpPowerUps();
 
@@ -84,32 +91,32 @@ namespace Game.Logic
                 if (timer % 60 == 0)
                     score += SCORE_PER_SECOND;
 
-                Debug.WriteLine("Score: " + score);
+                Debug.WriteLine("Score: " + score + " Health: " + Player.Health);
 
                 if (timer % 200 == 0)
                     Player.SpeedUp(0.1f);
             }
         }
 
-        void OnCollision(CollisionEventArgs eargs)
+        void OnPlayerCollision(ICollidable collisionWith)
         {
-            if (eargs.CollisionWith is Coin)
+            if (collisionWith is Coin)
             {
                 // delete object after picking it up
-                Coin coin = (Coin)eargs.CollisionWith;
+                Coin coin = (Coin)collisionWith;
                 MapObjectManager.ObjectsToRemove.Add(coin);
                 score += coin.Value;
             }
-            else if (eargs.CollisionWith is PowerUp)
+            else if (collisionWith is PowerUp)
             {
-                PowerUp powerUp = (PowerUp)eargs.CollisionWith;
+                PowerUp powerUp = (PowerUp)collisionWith;
                 // delete object after picking it up
                 MapObjectManager.ObjectsToRemove.Add(powerUp);
                 // add new pickedUpPowerUp
                 switch (powerUp.Type)
                 {
                     case PowerUp.PowerUpType.CoinMagnet:
-                        powerUps.Add(new CoinMagnet(150, 3));
+                        powerUps.Add(new CoinMagnet(100, 5));
                         break;
                     case PowerUp.PowerUpType.BonusHealth:
                         powerUps.Add(new BonusHealth());
@@ -139,13 +146,39 @@ namespace Game.Logic
             }
         }
 
+        void OnBulletCollision(Bullet bullet, ICollidable collisionWith)
+        {
+            if (collisionWith is Car)
+            {
+                Car car = (Car)collisionWith;
+                MapObjectManager.ObjectsToRemove.Add(bullet);
+                car.Health -= bullet.Damage;
+                if (car.Health < 1)
+                {
+                    MapObjectManager.ObjectsToRemove.Add(car);
+                }
+            }
+        }
+
+        void OnCollision(CollisionEventArgs eargs)
+        {
+            if (eargs.MapObject is Player)
+            {
+                OnPlayerCollision(eargs.CollisionWith);
+            }
+            else if (eargs.MapObject is Bullet)
+            {
+                OnBulletCollision((Bullet)eargs.MapObject, eargs.CollisionWith);
+            }
+        }
+
         void UpdatePickedUpPowerUps()
         {
             List<PickedUpPowerUp> toRemove = new List<PickedUpPowerUp>();
             
             foreach (var item in powerUps)
             {
-                item.Update(MapObjects, Player, ref score);
+                item.Update(MapObjects, bullets, Player, ref score);
                 // if timer is 0, power up is no longer active so remove it
                 if (item.LifeTime == 0)
                 {
@@ -170,6 +203,21 @@ namespace Game.Logic
         void InitMapObjects()
         {
             MapObjects = new List<MapObject>();
-        } 
+        }
+
+        public void Render(DrawingContext drawingContext)
+        {
+            // render all the objects on the map
+            foreach (var item in MapObjects)
+            {
+                item.Render(drawingContext);
+            }
+            foreach (var item in bullets)
+            {
+                item.Render(drawingContext);
+            }
+            // render player
+            Player.Render(drawingContext);
+        }
     }
 }

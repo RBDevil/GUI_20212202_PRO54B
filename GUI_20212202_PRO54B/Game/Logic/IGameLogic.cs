@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Game.Logic
 {
@@ -14,6 +15,7 @@ namespace Game.Logic
 
         Player Player { get; }
 
+        void Render(DrawingContext drawingContext);
         void Update();
         void PlayerControl(Controls control);
     }

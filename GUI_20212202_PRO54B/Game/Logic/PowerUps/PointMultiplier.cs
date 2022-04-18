@@ -11,6 +11,11 @@ namespace Game.Logic.PowerUps
     class PointMultiplier : PickedUpPowerUp
     {
         int points = 0;
+        public PointMultiplier()
+        {
+            LifeTime = 600;
+        }
+
         public void OnCollision(CollisionEventArgs eargs) 
         {
             Coin coin = eargs.CollisionWith as Coin;
@@ -20,9 +25,9 @@ namespace Game.Logic.PowerUps
             }
         }
 
-        public override void Update(List<MapObject> mapObjects, Player player, ref int score)
+        public override void Update(List<MapObject> mapObjects, List<Bullet> bullets, Player player, ref int score)
         {
-            base.Update(mapObjects, player, ref score);
+            base.Update(mapObjects, bullets, player, ref score);
             score += points;
             points = 0;
         }

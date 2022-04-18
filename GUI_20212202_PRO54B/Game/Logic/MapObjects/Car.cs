@@ -11,11 +11,13 @@ namespace Game.Logic.MapObjects
 {
     class Car : MapObject, ICollidable
     {
+        public int Health { get; set; }
         public Rect Rect { get; private set; }
 
         public Car(Vector2 position, int widht, int height) 
             : base(position, widht, height)
         {
+            Health = 5;
         }
 
         public override void Render(DrawingContext drawingContext)

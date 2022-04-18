@@ -10,12 +10,17 @@ namespace Game.Logic.PowerUps
 {
     class Minigun : PickedUpPowerUp
     {
-        public override void Update(List<MapObject> mapObjects, Player player, ref int score)
+        public Minigun()
         {
-            base.Update(mapObjects, player, ref score);
+            LifeTime = 600;
+        }
+
+        public override void Update(List<MapObject> mapObjects, List<Bullet> bullets, Player player, ref int score)
+        {
+            base.Update(mapObjects, bullets, player, ref score);
             if (Keyboard.IsKeyDown(Key.Space))
             {
-                mapObjects.Add(new Bullet(player.Position));
+                bullets.Add(new Bullet(player.Position));
             }
         }
     }
