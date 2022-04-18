@@ -124,6 +124,14 @@ namespace Game.Logic
                         break;
                 }
             }
+            else if (Player.CollisionDisabledUntil > timer)
+            {
+            }
+            else if (Player.Health > 1)
+            {
+                Player.Health--;
+                Player.CollisionDisabledUntil = timer + 120;
+            }
             else
             {
                 gameOver = true;

@@ -13,6 +13,7 @@ namespace Game.Logic.MapObjects
     public class Player : MapObject, ICollidable
     {
         public int Health { get; set; }
+        public int CollisionDisabledUntil { get; set; }
         public float Speed { get; private set; }
         public Rect Rect { get; private set; }
 
