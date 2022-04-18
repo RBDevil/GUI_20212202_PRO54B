@@ -41,7 +41,7 @@ namespace Game.Logic.Managers
                 }
                 else
                 {
-                    mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.CoinMagnet));
+                    mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.PointMultiplier));
                 }
             }
 

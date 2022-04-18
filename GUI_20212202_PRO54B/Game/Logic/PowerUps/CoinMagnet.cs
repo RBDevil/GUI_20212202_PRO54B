@@ -18,9 +18,9 @@ namespace Game.Logic.PowerUps
             LifeTime = 900;
         }
 
-        public override void Update(List<MapObject> mapObjects, Player player)
+        public override void Update(List<MapObject> mapObjects, Player player, ref int score)
         {
-            base.Update(mapObjects, player);
+            base.Update(mapObjects, player, ref score);
 
             foreach (var item in mapObjects)
             {

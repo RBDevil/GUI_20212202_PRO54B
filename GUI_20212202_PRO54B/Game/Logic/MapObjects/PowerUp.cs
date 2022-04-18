@@ -16,7 +16,7 @@ namespace Game.Logic.MapObjects
             CoinMagnet,
             BonusHealth,
             Minigun,
-            PointMultiplyer
+            PointMultiplier
         }
 
         public Rect Rect { get => new Rect(Position.X, Position.Y, Widht, Height); }
@@ -37,7 +37,7 @@ namespace Game.Logic.MapObjects
                     break;
                 case PowerUpType.Minigun:
                     break;
-                case PowerUpType.PointMultiplyer:
+                case PowerUpType.PointMultiplier:
                     break;
             }
         }

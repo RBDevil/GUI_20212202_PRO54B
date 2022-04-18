@@ -8,7 +8,7 @@ namespace Game.Logic.PowerUps
     {
         public int LifeTime { get; protected set; }
 
-        public virtual void Update(List<MapObject> mapObjects, Player player)
+        public virtual void Update(List<MapObject> mapObjects, Player player, ref int score)
         {
             LifeTime--;
         }

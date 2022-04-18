@@ -26,6 +26,8 @@ namespace Game.Logic
         public delegate void GameEventHandler();
         public event GameEventHandler GameOver;
 
+        public const int SCORE_PER_SECOND = 1;
+
         List<PickedUpPowerUp> powerUps = new List<PickedUpPowerUp>();
         public List<MapObject> MapObjects { get; private set; }
         public Player Player { get; private set; }
@@ -79,6 +81,10 @@ namespace Game.Logic
 
                 // increase timer, and speed if needed
                 timer++;
+                if (timer % 60 == 0)
+                    score += SCORE_PER_SECOND;
+
+                Debug.WriteLine("Score: " + score);
 
                 if (timer % 200 == 0)
                     Player.SpeedUp(0.1f);
@@ -90,7 +96,9 @@ namespace Game.Logic
             if (eargs.CollisionWith is Coin)
             {
                 // delete object after picking it up
-                MapObjectManager.ObjectsToRemove.Add((MapObject)eargs.CollisionWith);
+                Coin coin = (Coin)eargs.CollisionWith;
+                MapObjectManager.ObjectsToRemove.Add(coin);
+                score += coin.Value;
             }
             else if (eargs.CollisionWith is PowerUp)
             {
@@ -101,7 +109,7 @@ namespace Game.Logic
                 switch (powerUp.Type)
                 {
                     case PowerUp.PowerUpType.CoinMagnet:
-                        powerUps.Add(new CoinMagnet(300, 5));
+                        powerUps.Add(new CoinMagnet(150, 3));
                         break;
                     case PowerUp.PowerUpType.BonusHealth:
                         powerUps.Add(new BonusHealth());
@@ -109,8 +117,10 @@ namespace Game.Logic
                     case PowerUp.PowerUpType.Minigun:
                         powerUps.Add(new Minigun());
                         break;
-                    case PowerUp.PowerUpType.PointMultiplyer:
-                        powerUps.Add(new PointMultiplier());
+                    case PowerUp.PowerUpType.PointMultiplier:
+                        PointMultiplier pointMultiplier = new PointMultiplier();
+                        powerUps.Add(pointMultiplier);
+                        CollisionChecker.Collision += pointMultiplier.OnCollision;
                         break;
                 }
             }
@@ -127,7 +137,7 @@ namespace Game.Logic
             
             foreach (var item in powerUps)
             {
-                item.Update(MapObjects, Player);
+                item.Update(MapObjects, Player, ref score);
                 // if timer is 0, power up is no longer active so remove it
                 if (item.LifeTime == 0)
                 {
@@ -152,6 +162,6 @@ namespace Game.Logic
         void InitMapObjects()
         {
             MapObjects = new List<MapObject>();
-        }
+        } 
     }
 }

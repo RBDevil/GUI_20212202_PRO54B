@@ -12,11 +12,14 @@ namespace Game.Logic.MapObjects
     class Coin : MapObject, ICollidable
     {
         public Rect Rect { get => new Rect(Position.X, Position.Y, Widht, Height); }
+        public int Value { get; }
+
 
         const int RADIUS = 10;
 
         public Coin(Vector2 position) : base(position, RADIUS * 2, RADIUS * 2)
         {
+            Value = 3;
         }
 
         public override void Render(DrawingContext drawingContext)
