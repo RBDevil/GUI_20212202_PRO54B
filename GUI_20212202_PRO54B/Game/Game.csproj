@@ -7,11 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\coin.png" />
+    <None Remove="Resources\lada.png" />
     <None Remove="Resources\miata_na_green.png" />
     <None Remove="Resources\road.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\coin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\lada.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\miata_na_green.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

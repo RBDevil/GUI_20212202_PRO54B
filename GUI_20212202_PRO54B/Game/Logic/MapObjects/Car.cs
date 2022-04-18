@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Game.Logic.MapObjects
 {
@@ -14,8 +16,12 @@ namespace Game.Logic.MapObjects
         public Rect Rect { get; private set; }
 
         public Car(Vector2 position, int widht, int height) 
-            : base(position, widht, height)
+            : base(position, height, widht)
         {
+            BitmapImage image = new BitmapImage(new Uri(Path.Combine("Resources", "lada.png"), UriKind.RelativeOrAbsolute));
+            Brush = new ImageBrush(image);
+            Widht = (int)image.Width;
+            Height = (int)image.Height;
         }
 
         public override void Render(DrawingContext drawingContext)

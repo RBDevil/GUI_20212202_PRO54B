@@ -7,7 +7,7 @@
         xmlns:renderer="clr-namespace:Game.Renderer"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="600"
-        Loaded="Window_Loaded" KeyDown="Window_KeyDown"
+        Loaded="Window_Loaded"
         x:Name="window">
     <Grid>
         <renderer:Display x:Name="display" />

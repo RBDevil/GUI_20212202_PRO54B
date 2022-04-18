@@ -8,6 +8,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Game.Logic
@@ -28,6 +29,9 @@ namespace Game.Logic
         public Player Player { get; private set; }
 
         bool gameOver = false;
+
+        int timer;
+        int point;
 
         public GameLogic(Size windowSize)
         {
@@ -62,6 +66,7 @@ namespace Game.Logic
 
             if (!gameOver)
             {
+                CheckInput();
                 Player.Update(Player.Speed);
                 foreach (var item in allMapObjects)
                 {
@@ -71,6 +76,27 @@ namespace Game.Logic
                 CollisionManager.Update(Player, MapObjects);
                 MapObjectManager.Update(MapObjects, BackgroundObjects);
             }
+
+            timer++;
+
+            if (timer % 1500 == 0)
+            {
+                Player.SpeedUp(1f);
+            }
+
+            Debug.WriteLine(point);
+        }
+
+        void CheckInput()
+        {
+            if (Keyboard.IsKeyDown(Key.Left) || Keyboard.IsKeyDown(Key.A))
+            {
+                PlayerControl(Controls.Left);
+            }
+            if (Keyboard.IsKeyDown(Key.Right) || Keyboard.IsKeyDown(Key.D))
+            {
+                PlayerControl(Controls.Right);
+            }
         }
 
         void OnCollision(CollisionEventArgs eargs)
@@ -79,9 +105,12 @@ namespace Game.Logic
             if (coin != null)
             {
                 MapObjectManager.ObjectsToRemove.Add(coin);
+                point += 3;
             }
             else
             {
+                point += timer / 60;
+                Debug.WriteLine(point);
                 gameOver = true;
                 GameOver?.Invoke();
             }
@@ -90,7 +119,7 @@ namespace Game.Logic
         void InitPlayer()
         {
             Player = new Player(
-                new Vector2(200, 300));
+                new Vector2(200, 470));
         }
 
         void InitMapObjects()

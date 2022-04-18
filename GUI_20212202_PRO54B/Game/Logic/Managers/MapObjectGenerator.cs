@@ -13,12 +13,12 @@ namespace Game.Logic.Managers
     {
         static Random rnd = new Random();
 
-        const int GENERATE_NUMBER = 15;
-        const int MIN_WIDHT = 30;
-        const int MIN_HEIGHT = 10;
-        const int MAX_WIDHT = 60;
-        const int MAX_HEIGHT = 20;
-        const int SPREAD = 1000;
+        const int GENERATE_NUMBER = 3;
+        const int MIN_WIDHT = 50;
+        const int MIN_HEIGHT = 90;
+        const int MAX_WIDHT = 50;
+        const int MAX_HEIGHT = 90;
+        const int SPREAD = 1500;
 
         public static List<MapObject> Generate(Size windowSize)
         {

@@ -16,7 +16,7 @@ namespace Game.Logic.MapObjects
         public float Speed { get; private set; }
         public Rect Rect { get; private set; }
 
-        const float TURNING_SPEED = 2f;
+        const float TURNING_SPEED = 3f;
 
         public Player(Vector2 position)
             : base(position, 0, 0)
@@ -25,7 +25,7 @@ namespace Game.Logic.MapObjects
             Brush = new ImageBrush(image);
             Widht = (int)image.Width;
             Height = (int)image.Height;
-            Speed = 2f;
+            Speed = 4f;
             Rect = new Rect(Position.X, Position.Y, Widht, Height);
         }
 
@@ -53,6 +53,11 @@ namespace Game.Logic.MapObjects
         public override void Render(DrawingContext drawingContext)
         {
             drawingContext.DrawRectangle(Brush, null, Rect);
+        }
+
+        public void SpeedUp(float speed)
+        {
+            Speed += speed;
         }
     }
 }
