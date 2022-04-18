@@ -19,7 +19,7 @@ namespace Game.Logic.Managers
         }
     }
 
-    static class CollisionManager
+    static class CollisionChecker
     {
         public delegate void CollisionEventHandler(CollisionEventArgs eargs);
         public static event CollisionEventHandler Collision;

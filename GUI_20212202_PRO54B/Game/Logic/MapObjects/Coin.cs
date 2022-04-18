@@ -23,5 +23,10 @@ namespace Game.Logic.MapObjects
         {
             drawingContext.DrawEllipse(Brush, null, new Point((int)(Position.X + RADIUS), (int)(Position.Y + RADIUS)), RADIUS, RADIUS);
         }
+
+        public void Move(Vector2 vector)
+        {
+            Position += vector;
+        }
     }
 }

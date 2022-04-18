@@ -5,12 +5,14 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Game.Logic.MapObjects
 {
     public class Player : MapObject, ICollidable
     {
+        public int Health { get; set; }
         public float Speed { get; private set; }
         public Rect Rect { get; private set; }
 
@@ -20,6 +22,7 @@ namespace Game.Logic.MapObjects
             : base(position, widht, height)
         {
             Speed = 2f;
+            Health = 1;
             Rect = new Rect(Position.X, Position.Y, Widht, Height);
         }
 
@@ -47,6 +50,14 @@ namespace Game.Logic.MapObjects
         public override void Update(float playerSpeed)
         {
             // do NOT call base method
+            if (Keyboard.IsKeyDown(Key.Right))
+            {
+                MoveRight();
+            }
+            if (Keyboard.IsKeyDown(Key.Left))
+            {
+                MoveLeft();
+            }
         }
 
         public override void Render(DrawingContext drawingContext)

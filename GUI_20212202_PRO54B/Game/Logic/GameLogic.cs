@@ -1,5 +1,6 @@
 ﻿using Game.Logic.Managers;
 using Game.Logic.MapObjects;
+using Game.Logic.PowerUps;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,6 +9,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -24,6 +26,7 @@ namespace Game.Logic
         public delegate void GameEventHandler();
         public event GameEventHandler GameOver;
 
+        List<PickedUpPowerUp> powerUps = new List<PickedUpPowerUp>();
         public List<MapObject> MapObjects { get; private set; }
         public Player Player { get; private set; }
 
@@ -35,7 +38,7 @@ namespace Game.Logic
         {
             InitMapObjects();
             InitPlayer();
-            CollisionManager.Collision += OnCollision;
+            CollisionChecker.Collision += OnCollision;
             MapObjectManager.Init(windowSize);
         }
 
@@ -61,34 +64,81 @@ namespace Game.Logic
         {            
             if (!gameOver)
             {
+                // update player
                 Player.Update(Player.Speed);
+                // update objects on the map
                 foreach (var item in MapObjects)
                 {
                     item.Update(Player.Speed);
                 }
 
-                CollisionManager.Update(Player, MapObjects);
+                CollisionChecker.Update(Player, MapObjects);
                 MapObjectManager.Update(MapObjects);
 
+                UpdatePickedUpPowerUps();
+
+                // increase timer, and speed if needed
                 timer++;
 
-                if(timer % 500 == 0)
-                {
-                    Player.SpeedUp(0.5f);
-                }
+                if (timer % 200 == 0)
+                    Player.SpeedUp(0.1f);
             }
         }
 
         void OnCollision(CollisionEventArgs eargs)
         {
-            if (eargs.CollisionWith is Coin || eargs.CollisionWith is PowerUp)
+            if (eargs.CollisionWith is Coin)
             {
+                // delete object after picking it up
                 MapObjectManager.ObjectsToRemove.Add((MapObject)eargs.CollisionWith);
+            }
+            else if (eargs.CollisionWith is PowerUp)
+            {
+                PowerUp powerUp = (PowerUp)eargs.CollisionWith;
+                // delete object after picking it up
+                MapObjectManager.ObjectsToRemove.Add(powerUp);
+                // add new pickedUpPowerUp
+                switch (powerUp.Type)
+                {
+                    case PowerUp.PowerUpType.CoinMagnet:
+                        powerUps.Add(new CoinMagnet(300, 5));
+                        break;
+                    case PowerUp.PowerUpType.BonusHealth:
+                        powerUps.Add(new BonusHealth());
+                        break;
+                    case PowerUp.PowerUpType.Minigun:
+                        powerUps.Add(new Minigun());
+                        break;
+                    case PowerUp.PowerUpType.PointMultiplyer:
+                        powerUps.Add(new PointMultiplier());
+                        break;
+                }
             }
             else
             {
                 gameOver = true;
                 GameOver?.Invoke();
+            }
+        }
+
+        void UpdatePickedUpPowerUps()
+        {
+            List<PickedUpPowerUp> toRemove = new List<PickedUpPowerUp>();
+            
+            foreach (var item in powerUps)
+            {
+                item.Update(MapObjects, Player);
+                // if timer is 0, power up is no longer active so remove it
+                if (item.LifeTime == 0)
+                {
+                    toRemove.Add(item);
+                }
+            }
+
+            // actually remove items
+            foreach (var item in toRemove)
+            {
+                powerUps.Remove(item);
             }
         }
 

@@ -27,6 +27,19 @@ namespace Game.Logic.MapObjects
 
         public PowerUp(Vector2 position, PowerUpType type) : base(position, RADIUS * 2, RADIUS * 2)
         {
+            Type = type;
+            // set texture (brush) here, depending on type
+            switch (type)
+            {
+                case PowerUpType.CoinMagnet:
+                    break;
+                case PowerUpType.BonusHealth:
+                    break;
+                case PowerUpType.Minigun:
+                    break;
+                case PowerUpType.PointMultiplyer:
+                    break;
+            }
         }
 
         public override void Render(DrawingContext drawingContext)
