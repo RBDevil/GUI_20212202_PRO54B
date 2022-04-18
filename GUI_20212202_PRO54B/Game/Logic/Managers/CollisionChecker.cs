@@ -33,7 +33,7 @@ namespace Game.Logic.Managers
             foreach (var item in mapObjects)
             {
                 ICollidable collidableItem = item as ICollidable;
-                if (collidableItem != null)
+                if (collidableItem != null && collidableItem is not Bullet)
                 {
                     if (player.Rect.IntersectsWith(collidableItem.Rect))
                     {
