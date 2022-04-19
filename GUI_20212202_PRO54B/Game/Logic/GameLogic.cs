@@ -45,6 +45,7 @@ namespace Game.Logic
             InitPlayer();
             CollisionChecker.Collision += OnCollision;
             MapObjectManager.Init(windowSize);
+            InitSoundManager();
         }
 
         public void PlayerControl(Controls control)
@@ -208,6 +209,12 @@ namespace Game.Logic
             MapObjects = new List<MapObject>();
             BackgroundObjects = new List<MapObject>();
             BackgroundObjects.Add(new Background(new Vector2(0, 0)));
+        }
+
+        void InitSoundManager()
+        {
+            SoundManager.PlayMusic();
+            GameOver += SoundManager.StopMusic;
         }
 
         public void Render(DrawingContext drawingContext)

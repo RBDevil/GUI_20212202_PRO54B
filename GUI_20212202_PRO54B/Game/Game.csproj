@@ -11,6 +11,8 @@
     <None Remove="Resources\lada.png" />
     <None Remove="Resources\miata_na_green.png" />
     <None Remove="Resources\road.png" />
+    <None Remove="Resources\sing-street-drive-it-like-you-stole-it-official-video-ytmp4converter.com.mp4" />
+    <None Remove="Resources\sing-street-drive-it-like-you-stole-it.mp3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +26,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\road.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\sing-street-drive-it-like-you-stole-it.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
