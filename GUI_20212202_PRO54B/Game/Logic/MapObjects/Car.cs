@@ -17,7 +17,7 @@ namespace Game.Logic.MapObjects
         public Car(Vector2 position, int widht, int height) 
             : base(position, widht, height)
         {
-            Health = 5;
+            Health = 3;
         }
 
         public override void Render(DrawingContext drawingContext)

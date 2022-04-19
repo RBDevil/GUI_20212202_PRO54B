@@ -25,9 +25,9 @@ namespace Game.Logic.PowerUps
             }
         }
 
-        public override void Update(List<MapObject> mapObjects, List<Bullet> bullets, Player player, ref int score)
+        public override void Update(List<MapObject> mapObjects, List<Bullet> bullets, Player player, ref int score, int timer, List<PickedUpPowerUp> toRemove)
         {
-            base.Update(mapObjects, bullets, player, ref score);
+            base.Update(mapObjects, bullets, player, ref score, timer, toRemove);
             score += points;
             points = 0;
         }

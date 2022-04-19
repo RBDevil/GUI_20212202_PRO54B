@@ -8,9 +8,13 @@ namespace Game.Logic.PowerUps
     {
         public int LifeTime { get; protected set; }
 
-        public virtual void Update(List<MapObject> mapObjects, List<Bullet> bullets, Player player, ref int score)
+        public virtual void Update(List<MapObject> mapObjects, List<Bullet> bullets, Player player, ref int score, int timer, List<PickedUpPowerUp> toRemove)
         {
             LifeTime--;
+            if (LifeTime == 0)
+            {
+                toRemove.Add(this);
+            }
         }
     }
 }

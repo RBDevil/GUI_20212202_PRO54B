@@ -178,12 +178,9 @@ namespace Game.Logic
             
             foreach (var item in powerUps)
             {
-                item.Update(MapObjects, bullets, Player, ref score);
+                item.Update(MapObjects, bullets, Player, ref score, timer, toRemove);
                 // if timer is 0, power up is no longer active so remove it
-                if (item.LifeTime == 0)
-                {
-                    toRemove.Add(item);
-                }
+
             }
 
             // actually remove items
