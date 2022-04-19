@@ -215,8 +215,10 @@ namespace Game.Logic
 
         void InitSoundManager()
         {
-            SoundManager.PlayMusic();
+            SoundManager.Init();
+            CollisionChecker.Collision += SoundManager.OnCollision;
             GameOver += SoundManager.StopMusic;
+            SoundManager.PlayMusic();
         }
 
         public void Render(DrawingContext drawingContext)

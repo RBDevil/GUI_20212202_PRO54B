@@ -10,6 +10,7 @@
     <None Remove="Resources\Animations\PoliceLightsAnimation\policeLights01.png" />
     <None Remove="Resources\Animations\PoliceLightsAnimation\policeLights02.png" />
     <None Remove="Resources\coin.png" />
+    <None Remove="Resources\coinSoundEffect.mp3" />
     <None Remove="Resources\lada.png" />
     <None Remove="Resources\miata_na_green.png" />
     <None Remove="Resources\road.png" />
@@ -37,6 +38,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\sing-street-drive-it-like-you-stole-it.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\coinSoundEffect.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
