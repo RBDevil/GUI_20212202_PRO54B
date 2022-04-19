@@ -29,6 +29,7 @@ namespace Game.Logic
         public const int SCORE_PER_SECOND = 1;
 
         public List<MapObject> MapObjects { get; private set; }
+        public List<MapObject> BackgroundObjects { get; private set; }
         public Player Player { get; private set; }
 
         List<PickedUpPowerUp> powerUps = new List<PickedUpPowerUp>();
@@ -37,6 +38,9 @@ namespace Game.Logic
         int score = 0;
         int timer = 0;
         bool gameOver = false;
+
+        int timer;
+        int point;
 
         public GameLogic(Size windowSize)
         {
@@ -65,7 +69,10 @@ namespace Game.Logic
         }
 
         public void Update()
-        {            
+        {
+            List<MapObject> allMapObjects = new List<MapObject>(MapObjects);
+            allMapObjects.AddRange(BackgroundObjects);
+
             if (!gameOver)
             {
                 // update player
@@ -141,6 +148,8 @@ namespace Game.Logic
             }
             else
             {
+                point += timer / 60;
+                Debug.WriteLine(point);
                 gameOver = true;
                 GameOver?.Invoke();
             }
@@ -193,13 +202,14 @@ namespace Game.Logic
         void InitPlayer()
         {
             Player = new Player(
-                new Vector2(200, 300),
-                40, 20);
+                new Vector2(200, 470));
         }
 
         void InitMapObjects()
         {
             MapObjects = new List<MapObject>();
+            BackgroundObjects = new List<MapObject>();
+            BackgroundObjects.Add(new Background(new Vector2(0, 0)));
         }
 
         public void Render(DrawingContext drawingContext)

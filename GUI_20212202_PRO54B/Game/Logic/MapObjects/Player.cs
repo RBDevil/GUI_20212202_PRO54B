@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Game.Logic.MapObjects
 {
@@ -17,12 +19,16 @@ namespace Game.Logic.MapObjects
         public float Speed { get; private set; }
         public Rect Rect { get; private set; }
 
-        const float TURNING_SPEED = 2f;
+        const float TURNING_SPEED = 3f;
 
-        public Player(Vector2 position, int widht, int height)
-            : base(position, widht, height)
+        public Player(Vector2 position)
+            : base(position, 0, 0)
         {
-            Speed = 2f;
+            BitmapImage image = new BitmapImage(new Uri(Path.Combine("Resources", "miata_na_green.png"), UriKind.RelativeOrAbsolute));
+            Brush = new ImageBrush(image);
+            Widht = (int)image.Width;
+            Height = (int)image.Height;
+            Speed = 4f;
             Health = 1;
             Rect = new Rect(Position.X, Position.Y, Widht, Height);
         }
@@ -64,6 +70,11 @@ namespace Game.Logic.MapObjects
         public override void Render(DrawingContext drawingContext)
         {
             drawingContext.DrawRectangle(Brush, null, Rect);
+        }
+
+        public void SpeedUp(float speed)
+        {
+            Speed += speed;
         }
     }
 }

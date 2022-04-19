@@ -12,6 +12,7 @@ namespace Game.Logic
     public interface IGameLogic
     {
         List<MapObject> MapObjects { get; }
+        List<MapObject> BackgroundObjects { get; }
 
         Player Player { get; }
 
