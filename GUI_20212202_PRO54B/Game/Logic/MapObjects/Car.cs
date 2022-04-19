@@ -16,6 +16,8 @@ namespace Game.Logic.MapObjects
         public int Health { get; set; }
         public Rect Rect { get; private set; }
 
+        const int MIRROR_WIDTH = 3;
+
         public Car(Vector2 position, int widht, int height) 
             : base(position, height, widht)
         {
@@ -28,14 +30,17 @@ namespace Game.Logic.MapObjects
 
         public override void Render(DrawingContext drawingContext)
         {
-            drawingContext.DrawRectangle(Brush, null, Rect);
+            drawingContext.DrawRectangle(
+                Brush, 
+                null, 
+                new Rect(Position.X, Position.Y, Widht, Height));
         }
 
         public override void Update(float playerSpeed)
         {
             base.Update(playerSpeed);
             // set rect after position changed to make sure it renders correctly
-            Rect = new Rect(Position.X, Position.Y, Widht, Height);
+            Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }
     }
 }

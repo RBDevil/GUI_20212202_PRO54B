@@ -20,6 +20,7 @@ namespace Game.Logic.MapObjects
         public Rect Rect { get; private set; }
 
         const float TURNING_SPEED = 3f;
+        const int MIRROR_WIDTH = 3;
 
         public Player(Vector2 position)
             : base(position, 0, 0)
@@ -30,7 +31,7 @@ namespace Game.Logic.MapObjects
             Height = (int)image.Height;
             Speed = 4f;
             Health = 1;
-            Rect = new Rect(Position.X, Position.Y, Widht, Height);
+            Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }
 
         public void MoveRight()
@@ -38,7 +39,7 @@ namespace Game.Logic.MapObjects
             // update position
             Position += new Vector2(TURNING_SPEED, 0);
             // update rect
-            Rect = new Rect(Position.X, Position.Y, Widht, Height);
+            Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }
 
         public void MoveLeft()
@@ -46,7 +47,7 @@ namespace Game.Logic.MapObjects
             // update position
             Position += new Vector2(-TURNING_SPEED, 0);
             // update rect
-            Rect = new Rect(Position.X, Position.Y, Widht, Height);
+            Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }
 
         public void SpeedUp(float speed)
@@ -69,7 +70,7 @@ namespace Game.Logic.MapObjects
 
         public override void Render(DrawingContext drawingContext)
         {
-            drawingContext.DrawRectangle(Brush, null, Rect);
+            drawingContext.DrawRectangle(Brush, null, new Rect(Position.X, Position.Y, Widht, Height));
         }
     }
 }

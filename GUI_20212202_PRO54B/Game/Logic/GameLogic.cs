@@ -1,6 +1,7 @@
 ﻿using Game.Logic.Managers;
 using Game.Logic.MapObjects;
 using Game.Logic.PowerUps;
+using Game.Renderer;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -45,6 +46,7 @@ namespace Game.Logic
             InitPlayer();
             CollisionChecker.Collision += OnCollision;
             MapObjectManager.Init(windowSize);
+            PoliceLights.Init(windowSize);
             InitSoundManager();
         }
 
@@ -201,7 +203,7 @@ namespace Game.Logic
         void InitPlayer()
         {
             Player = new Player(
-                new Vector2(200, 470));
+                new Vector2(200, 450));
         }
 
         void InitMapObjects()
@@ -234,6 +236,8 @@ namespace Game.Logic
             }
             // render player
             Player.Render(drawingContext);
+
+            PoliceLights.Render(drawingContext);
         }
     }
 }

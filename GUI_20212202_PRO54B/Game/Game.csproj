@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Animations\PoliceLightsAnimation\policeLights01.png" />
+    <None Remove="Resources\Animations\PoliceLightsAnimation\policeLights02.png" />
     <None Remove="Resources\coin.png" />
     <None Remove="Resources\lada.png" />
     <None Remove="Resources\miata_na_green.png" />
@@ -16,6 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\Animations\PoliceLightsAnimation\policeLights01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Animations\PoliceLightsAnimation\policeLights02.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\coin.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

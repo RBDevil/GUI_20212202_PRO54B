@@ -82,8 +82,6 @@ namespace Game.Logic.Managers
                 }
             }
 
-            // TOOO
-            // put background objects into the same list as the rest
             foreach (var item in backgroundsToRemove)
             {
                 backgroundObjects.Remove(item);
