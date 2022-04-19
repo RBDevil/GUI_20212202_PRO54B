@@ -71,10 +71,5 @@ namespace Game.Logic.MapObjects
         {
             drawingContext.DrawRectangle(Brush, null, Rect);
         }
-
-        public void SpeedUp(float speed)
-        {
-            Speed += speed;
-        }
     }
 }

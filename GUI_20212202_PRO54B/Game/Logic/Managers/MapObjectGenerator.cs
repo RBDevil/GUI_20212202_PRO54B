@@ -69,7 +69,7 @@ namespace Game.Logic.Managers
             List<MapObject> newBackgrounds = new List<MapObject>();
 
             // gets next background generation position's y value
-            float yCoord = backgroundObjects.Max(x => x.Position.Y) - backgroundObjects[0].Height;
+            float yCoord = backgroundObjects.Max(x => x.Position.Y) - backgroundObjects[0].Height + 1;
 
             newBackgrounds.Add(new Background(new Vector2(0, yCoord)));
 

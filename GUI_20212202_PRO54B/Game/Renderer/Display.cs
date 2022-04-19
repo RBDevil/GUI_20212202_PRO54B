@@ -21,10 +21,7 @@ namespace Game.Renderer
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-            if (logic != null)
-            {
-                logic.Render(drawingContext);
-            }
+            logic?.Render(drawingContext);
         }
     }
 }

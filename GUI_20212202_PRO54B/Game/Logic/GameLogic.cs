@@ -39,9 +39,6 @@ namespace Game.Logic
         int timer = 0;
         bool gameOver = false;
 
-        int timer;
-        int point;
-
         public GameLogic(Size windowSize)
         {
             InitMapObjects();
@@ -82,14 +79,17 @@ namespace Game.Logic
                 {
                     item.Update(Player.Speed);
                 }
-
                 foreach (var item in bullets)
+                {
+                    item.Update(Player.Speed);
+                }
+                foreach (var item in BackgroundObjects)
                 {
                     item.Update(Player.Speed);
                 }
 
                 CollisionChecker.Update(Player, MapObjects, bullets);
-                MapObjectManager.Update(MapObjects, bullets);
+                MapObjectManager.Update(MapObjects, BackgroundObjects, bullets);
 
                 UpdatePickedUpPowerUps();
 
@@ -148,8 +148,6 @@ namespace Game.Logic
             }
             else
             {
-                point += timer / 60;
-                Debug.WriteLine(point);
                 gameOver = true;
                 GameOver?.Invoke();
             }
@@ -215,6 +213,10 @@ namespace Game.Logic
         public void Render(DrawingContext drawingContext)
         {
             // render all the objects on the map
+            foreach (var item in BackgroundObjects)
+            {
+                item.Render(drawingContext);
+            }
             foreach (var item in MapObjects)
             {
                 item.Render(drawingContext);
