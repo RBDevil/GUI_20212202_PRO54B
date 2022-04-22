@@ -23,43 +23,43 @@ namespace Game
     /// </summary>
     public partial class MainWindow : Window
     {
-        GameLogic logic;
+        //GameLogic logic;
         
         public MainWindow()
         {
             InitializeComponent();
-            Content = new MainMenu();
-            window.ResizeMode = ResizeMode.NoResize;
+            Content = new UC_MainMenu();
+            //window.ResizeMode = ResizeMode.NoResize;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //logic = new GameLogic(window.RenderSize);
-            //display.SetupLogic(logic);
+        //private void Window_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    logic = new GameLogic(window.RenderSize);
+        //    display.SetupLogic(logic);
 
-            //DispatcherTimer dt = new DispatcherTimer();
-            //dt.Interval = TimeSpan.FromMilliseconds(1000 / 60);
-            //dt.Tick += Dt_Tick;
-            //dt.Start();
-        }
+        //    DispatcherTimer dt = new DispatcherTimer();
+        //    dt.Interval = TimeSpan.FromMilliseconds(1000 / 60);
+        //    dt.Tick += Dt_Tick;
+        //    dt.Start();
+        //}
 
-        private void Dt_Tick(object sender, EventArgs e)
-        {
-            logic.Update();
-            display.InvalidateVisual();
-        }
+        //private void Dt_Tick(object sender, EventArgs e)
+        //{
+        //    logic.Update();
+        //    display.InvalidateVisual();
+        //}
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.Right:
-                    logic.PlayerControl(Controls.Right);
-                    break;
-                case Key.Left:
-                    logic.PlayerControl(Controls.Left);
-                    break;
-            }
-        }
+        //private void Window_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    switch (e.Key)
+        //    {
+        //        case Key.Right:
+        //            logic.PlayerControl(Controls.Right);
+        //            break;
+        //        case Key.Left:
+        //            logic.PlayerControl(Controls.Left);
+        //            break;
+        //    }
+        //}
     }
 }

@@ -16,18 +16,14 @@ using System.Windows.Shapes;
 namespace Game.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainMenu.xaml
+    /// Interaction logic for UC_MainGame.xaml
     /// </summary>
-    public partial class MainMenu : UserControl
+    public partial class UC_MainGame : UserControl
     {
-        public MainMenu()
+        public UC_MainGame()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //(Parent as Window).Content = new MainGame();
-        }
     }
 }

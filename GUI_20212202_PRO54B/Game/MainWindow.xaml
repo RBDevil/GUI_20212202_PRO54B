@@ -6,11 +6,9 @@
         xmlns:local="clr-namespace:Game"
         xmlns:renderer="clr-namespace:Game.Renderer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="600"
-        Loaded="Window_Loaded" KeyDown="Window_KeyDown"
-        x:Name="window">
+        Title="MainWindow" Height="600" Width="600">
     <Grid>
-        <renderer:Display x:Name="display" />
+        
     </Grid>
 
 </Window>
