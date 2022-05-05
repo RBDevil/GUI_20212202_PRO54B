@@ -30,7 +30,7 @@ namespace Game.UserControls
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            logic = new GameLogic(window.RenderSize);
+            logic = new GameLogic(/*window.RenderSize*/);
             display.SetupLogic(logic);
 
             DispatcherTimer dt = new DispatcherTimer();

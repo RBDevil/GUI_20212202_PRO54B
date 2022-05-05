@@ -31,12 +31,12 @@ namespace Game.Logic
         int timer = 0;
         bool gameOver = false;
 
-        public GameLogic(Size windowSize)
+        public GameLogic(/*Size windowSize*/)
         {
             InitMapObjects();
             InitPlayer();
             CollisionManager.Collision += OnCollision;
-            MapObjectManager.Init(windowSize);
+            //MapObjectManager.Init(windowSize);
         }
 
         public void PlayerControl(Controls control)

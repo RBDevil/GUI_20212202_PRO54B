@@ -23,7 +23,7 @@ namespace Game
     /// </summary>
     public partial class MainWindow : Window
     {
-        //GameLogic logic;
+        GameLogic logic;
         
         public MainWindow()
         {
@@ -35,7 +35,7 @@ namespace Game
         //private void Window_Loaded(object sender, RoutedEventArgs e)
         //{
         //    logic = new GameLogic(window.RenderSize);
-        //    display.SetupLogic(logic);
+        //   display.SetupLogic(logic);
 
         //    DispatcherTimer dt = new DispatcherTimer();
         //    dt.Interval = TimeSpan.FromMilliseconds(1000 / 60);
