@@ -1,26 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Game.Logic.MapObjects
 {
     public class Player : MapObject, ICollidable
     {
+        public int Health { get; set; }
+        public int CollisionDisabledUntil { get; set; }
         public float Speed { get; private set; }
         public Rect Rect { get; private set; }
 
-        const float TURNING_SPEED = 2f;
+        const float TURNING_SPEED = 3f;
+        const int MIRROR_WIDTH = 3;
 
-        public Player(Vector2 position, int widht, int height)
-            : base(position, widht, height)
+        public Player(Vector2 position)
+            : base(position, 0, 0)
         {
-            Speed = 2f;
-            Rect = new Rect(Position.X, Position.Y, Widht, Height);
+            BitmapImage image = new BitmapImage(new Uri(Path.Combine("Resources", "miata_na_green.png"), UriKind.RelativeOrAbsolute));
+            Brush = new ImageBrush(image);
+            Widht = (int)image.Width;
+            Height = (int)image.Height;
+            Speed = 4f;
+            Health = 1;
+            Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }
 
         public void MoveRight()
@@ -28,7 +39,7 @@ namespace Game.Logic.MapObjects
             // update position
             Position += new Vector2(TURNING_SPEED, 0);
             // update rect
-            Rect = new Rect(Position.X, Position.Y, Widht, Height);
+            Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }
 
         public void MoveLeft()
@@ -36,7 +47,7 @@ namespace Game.Logic.MapObjects
             // update position
             Position += new Vector2(-TURNING_SPEED, 0);
             // update rect
-            Rect = new Rect(Position.X, Position.Y, Widht, Height);
+            Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }
 
         public void SpeedUp(float speed)
@@ -47,11 +58,19 @@ namespace Game.Logic.MapObjects
         public override void Update(float playerSpeed)
         {
             // do NOT call base method
+            if (Keyboard.IsKeyDown(Key.Right))
+            {
+                MoveRight();
+            }
+            if (Keyboard.IsKeyDown(Key.Left))
+            {
+                MoveLeft();
+            }
         }
 
         public override void Render(DrawingContext drawingContext)
         {
-            drawingContext.DrawRectangle(Brush, null, Rect);
+            drawingContext.DrawRectangle(Brush, null, new Rect(Position.X, Position.Y, Widht, Height));
         }
     }
 }

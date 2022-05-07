@@ -14,12 +14,12 @@ namespace Game.Logic.Managers
     {
         static Random rnd = new Random();
 
-        const int GENERATE_NUMBER = 15;
-        const int MIN_WIDHT = 30;
-        const int MIN_HEIGHT = 10;
-        const int MAX_WIDHT = 60;
-        const int MAX_HEIGHT = 20;
-        const int SPREAD = 1000;
+        const int GENERATE_NUMBER = 3;
+        const int MIN_WIDHT = 50;
+        const int MIN_HEIGHT = 90;
+        const int MAX_WIDHT = 50;
+        const int MAX_HEIGHT = 90;
+        const int SPREAD = 1500;
 
         public static List<MapObject> Generate(Size windowSize)
         {
@@ -41,11 +41,39 @@ namespace Game.Logic.Managers
                 }
                 else
                 {
-                    mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.BonusHealth));
+                    int num2 = rnd.Next(0, 100);
+                    if (num2 < 25)
+                    {
+                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.BonusHealth));
+                    }
+                    else if (num2 < 50)
+                    {
+                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.CoinMagnet));
+                    }
+                    else if (num2 < 75)
+                    {
+                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.PointMultiplier));
+                    }
+                    else
+                    {
+                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.Minigun));
+                    }
                 }
             }
 
             return mapObjects;
+        }
+
+        public static List<MapObject> GenerateBackground(List<MapObject> backgroundObjects)
+        {
+            List<MapObject> newBackgrounds = new List<MapObject>();
+
+            // gets next background generation position's y value
+            float yCoord = backgroundObjects.Max(x => x.Position.Y) - backgroundObjects[0].Height + 1;
+
+            newBackgrounds.Add(new Background(new Vector2(0, yCoord)));
+
+            return newBackgrounds;
         }
     }
 }

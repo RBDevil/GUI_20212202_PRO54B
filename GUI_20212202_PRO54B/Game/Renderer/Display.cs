@@ -21,16 +21,7 @@ namespace Game.Renderer
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
-            if (logic != null)
-            {
-                // render all the objects on the map
-                foreach (var item in logic.MapObjects)
-                {
-                    item.Render(drawingContext);
-                }
-                // render player
-                logic.Player.Render(drawingContext);
-            }
+            logic?.Render(drawingContext);
         }
     }
 }

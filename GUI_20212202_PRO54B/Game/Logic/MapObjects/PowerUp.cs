@@ -16,7 +16,7 @@ namespace Game.Logic.MapObjects
             CoinMagnet,
             BonusHealth,
             Minigun,
-            PointMultiplyer
+            PointMultiplier
         }
 
         public Rect Rect { get => new Rect(Position.X, Position.Y, Widht, Height); }
@@ -27,6 +27,23 @@ namespace Game.Logic.MapObjects
 
         public PowerUp(Vector2 position, PowerUpType type) : base(position, RADIUS * 2, RADIUS * 2)
         {
+            Type = type;
+            // set texture (brush) here, depending on type
+            switch (type)
+            {
+                case PowerUpType.CoinMagnet:
+                    Brush = new SolidColorBrush(Color.FromRgb(0, 255, 0));
+                    break;
+                case PowerUpType.BonusHealth:
+                    Brush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                    break;
+                case PowerUpType.Minigun:
+                    Brush = new SolidColorBrush(Color.FromRgb(0, 0, 255));
+                    break;
+                case PowerUpType.PointMultiplier:
+                    Brush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                    break;
+            }
         }
 
         public override void Render(DrawingContext drawingContext)

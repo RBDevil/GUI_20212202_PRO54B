@@ -32,7 +32,7 @@ namespace Game
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            logic = new GameLogic(window.RenderSize);
+            logic = new GameLogic(grid.RenderSize);
             display.SetupLogic(logic);
 
             DispatcherTimer dt = new DispatcherTimer();
@@ -45,19 +45,6 @@ namespace Game
         {
             logic.Update();
             display.InvalidateVisual();
-        }
-
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.Right:
-                    logic.PlayerControl(Controls.Right);
-                    break;
-                case Key.Left:
-                    logic.PlayerControl(Controls.Left);
-                    break;
-            }
         }
     }
 }
