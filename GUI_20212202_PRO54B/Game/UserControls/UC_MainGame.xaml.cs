@@ -24,7 +24,6 @@ namespace Game.UserControls
     public partial class UC_MainGame : UserControl
     {
         GameLogic logic;
-        Display display;
 
         public UC_MainGame()
         {
@@ -37,7 +36,7 @@ namespace Game.UserControls
         private void Dt_Tick(object sender, EventArgs e)
         {
             logic.Update();
-            display.InvalidateVisual();
+            MG_display.InvalidateVisual();
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -57,7 +56,7 @@ namespace Game.UserControls
         {
             ;
             logic = new GameLogic(/*window.RenderSize*/);
-            display.SetupLogic(logic);
+            MG_display.SetupLogic(logic);
 
             DispatcherTimer dt = new DispatcherTimer();
             dt.Interval = TimeSpan.FromMilliseconds(1000 / 60);
