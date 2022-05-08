@@ -7,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public class PlayerData : ObservableRecipient
+    public static class PlayerData
     {
-        public static int Level = 0;
-        public static int Score = 0;
-        public static int CoinMagnetLevel = 0;
-        public static int MinigunLevel = 0;
-        public static int PointMultiplierLevel = 0;
-        public static int CarLevel = 0;
+        public static int Level;
+        public static int Score;
+        public static int CoinMagnetLevel;
+        public static int MinigunLevel;
+        public static int PointMultiplierLevel;
+        public static int CarLevel;
 
-        public PlayerData()
-        {
-
-        }
     }
 }

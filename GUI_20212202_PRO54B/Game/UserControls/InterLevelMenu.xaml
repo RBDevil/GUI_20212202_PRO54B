@@ -4,26 +4,50 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Game.UserControls"
-             xmlns:playerData="clr-namespace:Game"
-             mc:Ignorable="d" 
+             xmlns:Game="clr-namespace:Game"
+             mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="500">
+
     <UserControl.DataContext>
-        <playerData:PlayerData/>
+        <Game:InterLevelMenuViewModel/>
     </UserControl.DataContext>
     
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0">
             <Label Content="Score: "/>
-            <TextBlock Text="{Binding Score}"/>
+            <Label Content="{Binding Score, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="Level: "/>
             <Label Content="{Binding Level}"/>
         </StackPanel>
-        
+
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label Content="Coin magnet level: "/>
+            <Label Content="{Binding CoinMagnetLevel, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Minigun level: "/>
+            <Label Content="{Binding MinigunLevel, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Point multiplier level: "/>
+            <Label Content="{Binding PointMultiplierLevel, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Car level: "/>
+            <Label Content="{Binding CarLevel, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Button Content="Update Coin magnet" Command="{Binding CoinMagnetUpdateCommand}"/>
+            <Button Content="Update Minigun" Command="{Binding MinigunUpdateCommand}"/>
+            <Button Content="Update Point multiplier" Command="{Binding PointMultiplierUpdateCommand}"/>
+            <Button Content="Update Car" Command="{Binding CarUpdateCommand}"/>
+            <Button Content="Next level" Click="Button_Click"/>
+        </StackPanel>
+
     </Grid>
 </UserControl>

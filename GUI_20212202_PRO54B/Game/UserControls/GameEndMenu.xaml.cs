@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,19 +17,19 @@ using System.Windows.Shapes;
 namespace Game.UserControls
 {
     /// <summary>
-    /// Interaction logic for InterLevelMenu.xaml
+    /// Interaction logic for GameEndMenu.xaml
     /// </summary>
-    public partial class InterLevelMenu : UserControl
+    public partial class GameEndMenu : UserControl
     {
-        public InterLevelMenu()
+        
+        public GameEndMenu()
         {
             InitializeComponent();
         }
+    }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            PlayerData.Level++;
-            Content = new UC_MainGame();
-        }
+    public class GameEndMenuViewModel : ObservableRecipient
+    {
+        public int Score { get { return PlayerData.Score; } set { } }
     }
 }
