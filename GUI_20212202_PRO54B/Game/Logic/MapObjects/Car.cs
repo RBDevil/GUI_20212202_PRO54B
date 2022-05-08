@@ -17,8 +17,9 @@ namespace Game.Logic.MapObjects
         public Rect Rect { get; private set; }
 
         const int MIRROR_WIDTH = 3;
+        float speed;
 
-        public Car(Vector2 position, int widht, int height) 
+        public Car(Vector2 position, int widht, int height, int speed) 
             : base(position, height, widht)
         {
             BitmapImage image = new BitmapImage(new Uri(Path.Combine("Resources", "lada.png"), UriKind.RelativeOrAbsolute));
@@ -26,6 +27,7 @@ namespace Game.Logic.MapObjects
             Widht = (int)image.Width;
             Height = (int)image.Height;
             Health = 3;
+            this.speed = speed;
         }
 
         public override void Render(DrawingContext drawingContext)
@@ -38,7 +40,7 @@ namespace Game.Logic.MapObjects
 
         public override void Update(float playerSpeed)
         {
-            base.Update(playerSpeed);
+            base.Update(playerSpeed - speed);
             // set rect after position changed to make sure it renders correctly
             Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }

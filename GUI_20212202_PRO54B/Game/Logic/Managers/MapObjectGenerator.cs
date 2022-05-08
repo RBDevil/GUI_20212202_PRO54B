@@ -33,7 +33,8 @@ namespace Game.Logic.Managers
                     mapObjects.Add(new Car(
                         new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)),
                         rnd.Next(MIN_WIDHT, MAX_WIDHT),
-                        rnd.Next(MIN_HEIGHT, MAX_HEIGHT)));
+                        rnd.Next(MIN_HEIGHT, MAX_HEIGHT),
+                        rnd.Next(1, 4)));
                 }
                 else if (num > 5)
                 {
