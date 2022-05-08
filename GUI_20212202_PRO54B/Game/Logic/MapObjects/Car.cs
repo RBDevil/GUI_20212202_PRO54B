@@ -15,7 +15,10 @@ namespace Game.Logic.MapObjects
     {
         public int Health { get; set; }
         public Rect Rect { get; private set; }
+        public Rect ExtendedRect { get { return new Rect(Rect.X - 50, Rect.Y, Rect.Width, Rect.Height + 50); } }
 
+        const int MIN_SPEED = 1;
+        const int MAX_SPEED = 4;
         const int MIRROR_WIDTH = 3;
         float speed;
 
@@ -43,6 +46,24 @@ namespace Game.Logic.MapObjects
             base.Update(playerSpeed - speed);
             // set rect after position changed to make sure it renders correctly
             Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
+        }
+
+        public void Accelerate(float amount)
+        {
+            speed += amount;
+            if (speed > MAX_SPEED)
+            {
+                speed = MAX_SPEED;
+            }
+        }
+
+        public void Decelerate(float amount)
+        {
+            speed -= amount;
+            if (speed < MIN_SPEED)
+            {
+                speed = MIN_SPEED;
+            }
         }
     }
 }

@@ -148,6 +148,23 @@ namespace Game.Logic
             }
         }
 
+        void OnAiCollision(CollisionEventArgs eargs)
+        {
+            Car car1 = (Car)eargs.MapObject;
+            Car car2 = (Car)eargs.CollisionWith;
+
+            if (car1.Position.Y < car2.Position.Y)
+            {
+                car1.Accelerate(0.1f);
+                car2.Decelerate(0.1f);
+            }
+            else
+            {
+                car2.Accelerate(0.1f);
+                car1.Decelerate(0.1f);
+            }
+        }
+
         void OnCollision(CollisionEventArgs eargs)
         {
             if (eargs.MapObject is Player)
@@ -157,6 +174,10 @@ namespace Game.Logic
             else if (eargs.MapObject is Bullet)
             {
                 OnBulletCollision((Bullet)eargs.MapObject, eargs.CollisionWith);
+            }
+            else if (eargs.MapObject is Car && eargs.CollisionWith is Car)
+            {
+                OnAiCollision(eargs);
             }
         }
 

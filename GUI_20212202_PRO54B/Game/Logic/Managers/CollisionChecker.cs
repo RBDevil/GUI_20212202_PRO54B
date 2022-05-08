@@ -26,6 +26,7 @@ namespace Game.Logic.Managers
 
         public static void Update(Player player, List<MapObject> mapObjects, List<Bullet> bullets)
         {
+            // check player collision
             foreach (var item in mapObjects)
             {
                 ICollidable collidableItem = item as ICollidable;
@@ -37,7 +38,7 @@ namespace Game.Logic.Managers
                     }
                 }
             }
-
+            // check bullet collision
             foreach (var bullet in bullets)
             {
                 foreach (var mapObject in mapObjects)
@@ -51,6 +52,31 @@ namespace Game.Logic.Managers
                         }
                     }
                 } 
+            }
+            // check ai collision
+            foreach (var item in mapObjects)
+            {
+                ICollidable collidableItem = item as ICollidable;
+                if (collidableItem != null)
+                {
+                    foreach (var item2 in mapObjects)
+                    {
+                        ICollidable collidableItem2 = item2 as ICollidable;
+                        if (collidableItem2 != null)
+                        {
+                            if (!item.Equals(item2))
+                            {
+                                if (collidableItem is Car && collidableItem2 is Car)
+                                {
+                                    if ((collidableItem as Car).ExtendedRect.IntersectsWith((collidableItem2 as Car).ExtendedRect))
+                                    {
+                                        Collision?.Invoke(new CollisionEventArgs(collidableItem, collidableItem2));
+                                    }
+                                }
+                            }
+                        }                        
+                    }                  
+                }
             }
         }
     }
