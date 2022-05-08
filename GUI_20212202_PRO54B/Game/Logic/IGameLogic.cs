@@ -18,6 +18,5 @@ namespace Game.Logic
 
         void Render(DrawingContext drawingContext);
         void Update();
-        void PlayerControl(Controls control);
     }
 }

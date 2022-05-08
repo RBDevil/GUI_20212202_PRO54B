@@ -16,12 +16,6 @@ using System.Windows.Threading;
 
 namespace Game.Logic
 {
-    public enum Controls
-    {
-        Right,
-        Left
-    }
-
     class GameLogic : IGameLogic
     {
         public delegate void GameEventHandler();
@@ -48,24 +42,6 @@ namespace Game.Logic
             MapObjectManager.Init(windowSize);
             PoliceLights.Init(windowSize);
             InitSoundManager();
-        }
-
-        public void PlayerControl(Controls control)
-        {
-            if (!gameOver)
-            {
-                switch (control)
-                {
-                    case Controls.Right:
-                        Player.MoveRight();
-                        break;
-                    case Controls.Left:
-                        Player.MoveLeft();
-                        break;
-                    default:
-                        break;
-                }
-            }
         }
 
         public void Update()

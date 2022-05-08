@@ -20,6 +20,7 @@ namespace Game.Logic.MapObjects
         public Rect Rect { get; private set; }
 
         const float TURNING_SPEED = 3f;
+        const float SPEED = 2f;
         const int MIRROR_WIDTH = 3;
 
         public Player(Vector2 position)
@@ -50,6 +51,22 @@ namespace Game.Logic.MapObjects
             Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }
 
+        public void MoveForward()
+        {
+            // update position
+            Position += new Vector2(0, -SPEED);
+            // update rect
+            Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
+        }
+
+        public void MoveBackward()
+        {
+            // update position
+            Position += new Vector2(0, SPEED);
+            // update rect
+            Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
+        }
+
         public void SpeedUp(float speed)
         {
             Speed += speed;
@@ -58,13 +75,21 @@ namespace Game.Logic.MapObjects
         public override void Update(float playerSpeed)
         {
             // do NOT call base method
-            if (Keyboard.IsKeyDown(Key.Right))
+            if (Keyboard.IsKeyDown(Key.D))
             {
                 MoveRight();
             }
-            if (Keyboard.IsKeyDown(Key.Left))
+            if (Keyboard.IsKeyDown(Key.A))
             {
                 MoveLeft();
+            }
+            if (Keyboard.IsKeyDown(Key.W))
+            {
+                MoveForward();
+            }
+            if (Keyboard.IsKeyDown(Key.S))
+            {
+                MoveBackward();
             }
         }
 
