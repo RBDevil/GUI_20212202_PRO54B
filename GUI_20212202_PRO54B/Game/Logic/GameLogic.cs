@@ -18,7 +18,9 @@ namespace Game.Logic
 {
     class GameLogic : IGameLogic
     {
-        Size windowSize = new Size(600, 600);
+        public static bool DebugMode { get; private set; } 
+
+        Size windowSize = new Size(500, 600);
 
         public delegate void GameEventHandler();
         public event GameEventHandler GameOver;
@@ -32,6 +34,9 @@ namespace Game.Logic
         List<PickedUpPowerUp> powerUps = new List<PickedUpPowerUp>();
         List<Bullet> bullets = new List<Bullet>();
 
+        AnimationBrush policeLightsAnimation = new AnimationBrush("PoliceLightsAnimation", 10);
+        const int POLICE_LIGHT_ANIMATION_HEIGHT = 100;
+
         int score = 0;
         int timer = 0;
         bool gameOver = false;
@@ -42,8 +47,9 @@ namespace Game.Logic
         int pointMultiplierLevel;
         int carLevel;
 
-        public GameLogic(int level, int coinMagnetLevel, int minigunLevel, int pointMultiplierLevel, int carLevel)
+        public GameLogic(int level, int coinMagnetLevel, int minigunLevel, int pointMultiplierLevel, int carLevel, bool debugMode)
         {
+            DebugMode = debugMode;
             this.level = level;
             this.coinMagnetLevel = coinMagnetLevel;
             this.minigunLevel = minigunLevel;
@@ -53,7 +59,6 @@ namespace Game.Logic
             InitPlayer(this.level, this.carLevel);
             CollisionChecker.Collision += OnCollision;
             MapObjectManager.Init(windowSize);
-            PoliceLights.Init(windowSize);
             InitSoundManager();
         }
 
@@ -171,6 +176,35 @@ namespace Game.Logic
             }
         }
 
+        void OnAiCollision(CollisionEventArgs eargs)
+        {
+            Car car1 = (Car)eargs.MapObject;
+            Car car2 = (Car)eargs.CollisionWith;
+
+            if (car1.Position.Y < car2.Position.Y)
+            {
+                car1.Accelerate(0.02f);
+                car2.Decelerate(0.02f);
+            }
+            else
+            {
+                car2.Accelerate(0.02f);
+                car1.Decelerate(0.02f);
+            }
+
+            if (car1.Rect.IntersectsWith(car2.Rect))
+            {
+                if (car1.Position.Y > car2.Position.Y)
+                {
+                    car1.SetMinSpeed();
+                }
+                else
+                {
+                    car2.SetMinSpeed();
+                }
+            }
+        }
+
         void OnCollision(CollisionEventArgs eargs)
         {
             if (eargs.MapObject is Player)
@@ -180,6 +214,10 @@ namespace Game.Logic
             else if (eargs.MapObject is Bullet)
             {
                 OnBulletCollision((Bullet)eargs.MapObject, eargs.CollisionWith);
+            }
+            else if (eargs.MapObject is Car && eargs.CollisionWith is Car)
+            {
+                OnAiCollision(eargs);
             }
         }
 
@@ -245,7 +283,10 @@ namespace Game.Logic
             // render player
             Player.Render(drawingContext);
 
-            PoliceLights.Render(drawingContext);
+            if (Player.Speed > 3)
+            {
+                policeLightsAnimation.Render(drawingContext, new Vector2(0, (float)windowSize.Height - POLICE_LIGHT_ANIMATION_HEIGHT - 38));
+            }
         }
     }
 }

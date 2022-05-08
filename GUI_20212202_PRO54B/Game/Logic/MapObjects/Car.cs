@@ -15,8 +15,11 @@ namespace Game.Logic.MapObjects
     {
         public int Health { get; set; }
         public Rect Rect { get; private set; }
+        public Rect ExtendedRect { get { return new Rect(Rect.X, Rect.Y - 50, Rect.Width, Rect.Height + 100); } }
 
-        const int MIRROR_WIDTH = 3;
+        const float MIN_SPEED = 1;
+        protected float MAX_SPEED = 4;
+        const int MIRROR_WIDTH = 4;
         float speed;
 
         public Car(Vector2 position, int widht, int height, int speed) 
@@ -32,6 +35,11 @@ namespace Game.Logic.MapObjects
 
         public override void Render(DrawingContext drawingContext)
         {
+            if (GameLogic.DebugMode)
+            {
+                drawingContext.DrawRectangle(Brushes.Blue, null, ExtendedRect);
+                drawingContext.DrawRectangle(Brushes.Red, null, Rect);
+            }
             drawingContext.DrawRectangle(
                 Brush, 
                 null, 
@@ -43,6 +51,29 @@ namespace Game.Logic.MapObjects
             base.Update(playerSpeed - speed);
             // set rect after position changed to make sure it renders correctly
             Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
+        }
+
+        public void Accelerate(float amount)
+        {
+            speed += amount;
+            if (speed > MAX_SPEED)
+            {
+                speed = MAX_SPEED;
+            }
+        }
+
+        public void Decelerate(float amount)
+        {
+            speed -= amount;
+            if (speed < MIN_SPEED)
+            {
+                speed = MIN_SPEED;
+            }
+        }
+
+        public void SetMinSpeed()
+        {
+            speed = MIN_SPEED;
         }
     }
 }

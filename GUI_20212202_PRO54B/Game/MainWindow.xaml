@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Game"
         xmlns:renderer="clr-namespace:Game.Renderer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="600"
+        Title="MainWindow" Height="600" Width="500"
         Loaded="Window_Loaded"
         x:Name="window">
     <Grid x:Name="grid">
