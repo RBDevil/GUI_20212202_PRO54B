@@ -23,7 +23,7 @@ namespace Game.Logic.MapObjects
         public Coin(Vector2 position) : base(position, RADIUS * 2, RADIUS * 2)
         {
             Value = 3;
-            Brush = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Resources", "coin.png"), UriKind.RelativeOrAbsolute)));
+            Brush = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Resources", "mycoin.png"), UriKind.RelativeOrAbsolute)));
         }
 
         public override void Render(DrawingContext drawingContext)

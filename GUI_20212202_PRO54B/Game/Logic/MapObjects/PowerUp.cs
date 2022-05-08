@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Game.Logic.MapObjects
 {
@@ -29,19 +31,20 @@ namespace Game.Logic.MapObjects
         {
             Type = type;
             // set texture (brush) here, depending on type
+            // Brush = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Resources", "mycoin.png"), UriKind.RelativeOrAbsolute)));
             switch (type)
             {
                 case PowerUpType.CoinMagnet:
-                    Brush = new SolidColorBrush(Color.FromRgb(0, 255, 0));
+                    Brush = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Resources", "powerup_magnet.png"), UriKind.RelativeOrAbsolute)));
                     break;
                 case PowerUpType.BonusHealth:
-                    Brush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                    Brush = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Resources", "powerup_heart.png"), UriKind.RelativeOrAbsolute)));
                     break;
                 case PowerUpType.Minigun:
-                    Brush = new SolidColorBrush(Color.FromRgb(0, 0, 255));
+                    Brush = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Resources", "powerup_minigun.png"), UriKind.RelativeOrAbsolute)));
                     break;
                 case PowerUpType.PointMultiplier:
-                    Brush = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                    Brush = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Resources", "powerup_2x.png"), UriKind.RelativeOrAbsolute)));
                     break;
             }
         }

@@ -9,20 +9,27 @@
   <ItemGroup>
     <None Remove="Resources\Animations\PoliceLightsAnimation\policeLights01.png" />
     <None Remove="Resources\Animations\PoliceLightsAnimation\policeLights02.png" />
+    <None Remove="Resources\Animations\PoliceLightsAnimation\police_lights_better1.png" />
+    <None Remove="Resources\Animations\PoliceLightsAnimation\police_lights_better2.png" />
     <None Remove="Resources\coin.png" />
     <None Remove="Resources\coinSoundEffect.mp3" />
     <None Remove="Resources\lada.png" />
     <None Remove="Resources\miata_na_green.png" />
+    <None Remove="Resources\mycoin.png" />
+    <None Remove="Resources\powerup_2x.png" />
+    <None Remove="Resources\powerup_heart.png" />
+    <None Remove="Resources\powerup_magnet.png" />
+    <None Remove="Resources\powerup_minigun.png" />
     <None Remove="Resources\road.png" />
     <None Remove="Resources\sing-street-drive-it-like-you-stole-it-official-video-ytmp4converter.com.mp4" />
     <None Remove="Resources\sing-street-drive-it-like-you-stole-it.mp3" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Animations\PoliceLightsAnimation\policeLights01.png">
+    <Content Include="Resources\Animations\PoliceLightsAnimation\police_lights_better1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Animations\PoliceLightsAnimation\policeLights02.png">
+    <Content Include="Resources\Animations\PoliceLightsAnimation\police_lights_better2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\coin.png">
@@ -32,6 +39,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\miata_na_green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\mycoin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\powerup_2x.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\powerup_heart.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\powerup_magnet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\powerup_minigun.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\road.png">
