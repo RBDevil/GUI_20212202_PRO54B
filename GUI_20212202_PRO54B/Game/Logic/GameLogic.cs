@@ -34,6 +34,9 @@ namespace Game.Logic
         List<PickedUpPowerUp> powerUps = new List<PickedUpPowerUp>();
         List<Bullet> bullets = new List<Bullet>();
 
+        AnimationBrush policeLightsAnimation = new AnimationBrush("PoliceLightsAnimation", 10);
+        const int POLICE_LIGHT_ANIMATION_HEIGHT = 100;
+
         int score = 0;
         int timer = 0;
         bool gameOver = false;
@@ -45,7 +48,6 @@ namespace Game.Logic
             InitPlayer();
             CollisionChecker.Collision += OnCollision;
             MapObjectManager.Init(windowSize);
-            PoliceLights.Init(windowSize);
             InitSoundManager();
         }
 
@@ -253,7 +255,10 @@ namespace Game.Logic
             // render player
             Player.Render(drawingContext);
 
-            PoliceLights.Render(drawingContext);
+            if (Player.Speed > 3)
+            {
+                policeLightsAnimation.Render(drawingContext, new Vector2(0, (float)windowSize.Height - POLICE_LIGHT_ANIMATION_HEIGHT - 38));
+            }
         }
     }
 }
