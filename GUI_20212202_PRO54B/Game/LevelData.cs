@@ -36,10 +36,10 @@ namespace Game
 
         public static readonly float[][] CarLevel = new float[][]
         {
-            new float[] { 2f, 2f, 3f},
-            new float[] { 2.5f, 2f, 3f},
-            new float[] { 2.5f, 2.5f, 3f},
-            new float[] { 2.5f, 2.5f, 3.5f}
+            new float[] { 1f, 1f, 1.5f},
+            new float[] { 1.2f, 1.2f, 1.7f},
+            new float[] { 1.5f, 1.5f, 2f},
+            new float[] { 2f, 2f, 3f}
         };
     }
 }

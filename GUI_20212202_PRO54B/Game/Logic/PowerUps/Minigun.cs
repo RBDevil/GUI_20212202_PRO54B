@@ -28,7 +28,7 @@ namespace Game.Logic.PowerUps
             {
                 nextShotAvailableTime = timer + reloadTime;
                 AmmoCount--;
-                bullets.Add(new Bullet(player.Position));
+                bullets.Add(new Bullet(player.Position + new System.Numerics.Vector2(25, 0)));
                 if (AmmoCount == 0)
                 {
                     toRemove.Add(this);

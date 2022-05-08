@@ -17,7 +17,7 @@ namespace Game.Logic.MapObjects
         public Rect Rect { get; private set; }
         public Rect ExtendedRect { get { return new Rect(Rect.X, Rect.Y - 50, Rect.Width, Rect.Height + 100); } }
 
-        ImageBrush texture, brakeTexture;
+        protected ImageBrush texture, brakeTexture;
 
         const float MIN_SPEED = 1;
         protected float MAX_SPEED = 4;

@@ -36,7 +36,7 @@ namespace Game.Logic.Managers
                         rnd.Next(MIN_HEIGHT, MAX_HEIGHT),
                         rnd.Next(1, 4)));
                 }
-                else if (num > 19)
+                else if (num > 13)
                 {
                     mapObjects.Add(new SlowCar(
                        new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)),

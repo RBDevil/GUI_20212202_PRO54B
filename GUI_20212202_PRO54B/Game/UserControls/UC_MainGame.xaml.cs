@@ -38,7 +38,7 @@ namespace Game.UserControls
         private void MainGameWindow_Loaded(object sender, RoutedEventArgs e)
         {
             logic = new GameLogic(PlayerData.Level, PlayerData.CoinMagnetLevel, PlayerData.MinigunLevel,
-                PlayerData.PointMultiplierLevel, PlayerData.CarLevel, false);
+                PlayerData.PointMultiplierLevel, PlayerData.CarLevel, true);
             logic.GameOver += OnGameOver;
             MG_display.SetupLogic(logic);
 

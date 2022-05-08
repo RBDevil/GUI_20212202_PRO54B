@@ -28,6 +28,7 @@
     <None Remove="Resources\road.png" />
     <None Remove="Resources\sing-street-drive-it-like-you-stole-it-official-video-ytmp4converter.com.mp4" />
     <None Remove="Resources\sing-street-drive-it-like-you-stole-it.mp3" />
+    <None Remove="Resources\tractor.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -86,6 +87,9 @@
 
   <ItemGroup>
     <Content Include="Resources\coinSoundEffect.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\tractor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
