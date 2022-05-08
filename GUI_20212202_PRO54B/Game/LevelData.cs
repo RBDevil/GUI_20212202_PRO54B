@@ -9,7 +9,7 @@ namespace Game
 {
     static class LevelData
     {
-        public static readonly float[] StartingSpeeds = new []{ 2f, 2.5f, 3f };
+        public static readonly float[] StartingSpeeds = new []{ 4f, 4.5f, 5f };
 
         // range, power, lifetime
         public static readonly CoinMagnet[] CoinMagnetLevel = new CoinMagnet[]

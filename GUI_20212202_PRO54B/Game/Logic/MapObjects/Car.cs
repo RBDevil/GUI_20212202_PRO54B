@@ -17,6 +17,8 @@ namespace Game.Logic.MapObjects
         public Rect Rect { get; private set; }
         public Rect ExtendedRect { get { return new Rect(Rect.X, Rect.Y - 50, Rect.Width, Rect.Height + 100); } }
 
+        ImageBrush texture, brakeTexture;
+
         const float MIN_SPEED = 1;
         protected float MAX_SPEED = 4;
         const int MIRROR_WIDTH = 4;
@@ -26,7 +28,10 @@ namespace Game.Logic.MapObjects
             : base(position, height, widht)
         {
             BitmapImage image = new BitmapImage(new Uri(Path.Combine("Resources", "lada.png"), UriKind.RelativeOrAbsolute));
-            Brush = new ImageBrush(image);
+            texture = new ImageBrush(image);
+            BitmapImage brakeImage = new BitmapImage(new Uri(Path.Combine("Resources", "lada_brake.png"), UriKind.RelativeOrAbsolute));
+            brakeTexture = new ImageBrush(brakeImage);
+            Brush = texture;
             Widht = (int)image.Width;
             Height = (int)image.Height;
             Health = 3;
@@ -48,6 +53,7 @@ namespace Game.Logic.MapObjects
 
         public override void Update(float playerSpeed)
         {
+            Brush = texture;
             base.Update(playerSpeed - speed);
             // set rect after position changed to make sure it renders correctly
             Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
@@ -68,6 +74,10 @@ namespace Game.Logic.MapObjects
             if (speed < MIN_SPEED)
             {
                 speed = MIN_SPEED;
+            }
+            else
+            {
+                Brush = brakeTexture;
             }
         }
 

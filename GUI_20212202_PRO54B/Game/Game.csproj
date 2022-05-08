@@ -14,7 +14,11 @@
     <None Remove="Resources\coin.png" />
     <None Remove="Resources\coinSoundEffect.mp3" />
     <None Remove="Resources\lada.png" />
+    <None Remove="Resources\lada_brake.png" />
+    <None Remove="Resources\lada_red.png" />
+    <None Remove="Resources\lada_red_brake.png" />
     <None Remove="Resources\miata_na_green.png" />
+    <None Remove="Resources\miata_na_green_brake.png" />
     <None Remove="Resources\mycoin.png" />
     <None Remove="Resources\powerup_2x.png" />
     <None Remove="Resources\powerup_heart.png" />
@@ -38,7 +42,19 @@
     <Content Include="Resources\lada.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\lada_brake.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\lada_red.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\lada_red_brake.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\miata_na_green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\miata_na_green_brake.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\mycoin.png">
