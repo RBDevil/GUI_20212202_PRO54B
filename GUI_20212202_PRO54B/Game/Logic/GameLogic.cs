@@ -20,7 +20,7 @@ namespace Game.Logic
     {
         public static bool DebugMode { get; private set; } 
 
-        Size windowSize = new Size(600, 600);
+        Size windowSize = new Size(500, 600);
 
         public delegate void GameEventHandler();
         public event GameEventHandler GameOver;
