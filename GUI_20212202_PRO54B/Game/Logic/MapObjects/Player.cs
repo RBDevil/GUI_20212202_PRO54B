@@ -21,7 +21,7 @@ namespace Game.Logic.MapObjects
 
         const float TURNING_SPEED = 3f;
         const float SPEED = 2f;
-        const int MIRROR_WIDTH = 3;
+        const int MIRROR_WIDTH = 4;
 
         public Player(Vector2 position)
             : base(position, 0, 0)
@@ -95,6 +95,10 @@ namespace Game.Logic.MapObjects
 
         public override void Render(DrawingContext drawingContext)
         {
+            if (GameLogic.DebugMode)
+            {
+                drawingContext.DrawRectangle(Brushes.Red, null, Rect);
+            }
             drawingContext.DrawRectangle(Brush, null, new Rect(Position.X, Position.Y, Widht, Height));
         }
     }

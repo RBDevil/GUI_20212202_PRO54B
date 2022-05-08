@@ -28,7 +28,7 @@ namespace Game.Logic.Managers
             for (int i = 0; i < GENERATE_NUMBER; i++)
             {
                 int num = rnd.Next(0, 100);
-                if (num > 10)
+                if (num > 20)
                 {
                     mapObjects.Add(new Car(
                         new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)),
@@ -36,22 +36,35 @@ namespace Game.Logic.Managers
                         rnd.Next(MIN_HEIGHT, MAX_HEIGHT),
                         rnd.Next(1, 4)));
                 }
+                else if (num > 19)
+                {
+                    mapObjects.Add(new SlowCar(
+                       new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)),
+                       rnd.Next(MIN_WIDHT, MAX_WIDHT),
+                       rnd.Next(MIN_HEIGHT, MAX_HEIGHT),
+                       rnd.Next(1, 4)));
+                }
                 else if (num > 5)
                 {
-                    mapObjects.Add(new Coin(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100))));
+                    int Y = rnd.Next(-100 - SPREAD, -100);
+                    int X = rnd.Next(0, (int)windowSize.Width);
+                    for (int j = 0; j < rnd.Next(3,5); j++)
+                    {
+                        mapObjects.Add(new Coin(new Vector2(X, Y - j * 100)));
+                    }
                 }
                 else
                 {
                     int num2 = rnd.Next(0, 100);
-                    if (num2 < 25)
+                    if (num2 < 10)
                     {
                         mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.BonusHealth));
                     }
-                    else if (num2 < 50)
+                    else if (num2 < 43)
                     {
                         mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.CoinMagnet));
                     }
-                    else if (num2 < 75)
+                    else if (num2 < 76)
                     {
                         mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.PointMultiplier));
                     }

@@ -18,6 +18,8 @@ namespace Game.Logic
 {
     class GameLogic : IGameLogic
     {
+        public static bool DebugMode { get; private set; } 
+
         Size windowSize = new Size(600, 600);
 
         public delegate void GameEventHandler();
@@ -36,8 +38,9 @@ namespace Game.Logic
         int timer = 0;
         bool gameOver = false;
 
-        public GameLogic()
+        public GameLogic(bool debugMode)
         {
+            DebugMode = debugMode;
             InitMapObjects();
             InitPlayer();
             CollisionChecker.Collision += OnCollision;
@@ -155,13 +158,25 @@ namespace Game.Logic
 
             if (car1.Position.Y < car2.Position.Y)
             {
-                car1.Accelerate(0.1f);
-                car2.Decelerate(0.1f);
+                car1.Accelerate(0.02f);
+                car2.Decelerate(0.02f);
             }
             else
             {
-                car2.Accelerate(0.1f);
-                car1.Decelerate(0.1f);
+                car2.Accelerate(0.02f);
+                car1.Decelerate(0.02f);
+            }
+
+            if (car1.Rect.IntersectsWith(car2.Rect))
+            {
+                if (car1.Position.Y > car2.Position.Y)
+                {
+                    car1.SetMinSpeed();
+                }
+                else
+                {
+                    car2.SetMinSpeed();
+                }
             }
         }
 
