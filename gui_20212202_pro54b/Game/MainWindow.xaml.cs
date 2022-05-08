@@ -32,7 +32,7 @@ namespace Game
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            logic = new GameLogic();
+            logic = new GameLogic(false);
             display.SetupLogic(logic);
 
             DispatcherTimer dt = new DispatcherTimer();
