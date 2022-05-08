@@ -32,7 +32,8 @@ namespace Game
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            logic = new GameLogic();
+            logic = new GameLogic(PlayerData.Level, PlayerData.CoinMagnetLevel, PlayerData.MinigunLevel,
+                PlayerData.PointMultiplierLevel, PlayerData.CarLevel);
             display.SetupLogic(logic);
 
             DispatcherTimer dt = new DispatcherTimer();

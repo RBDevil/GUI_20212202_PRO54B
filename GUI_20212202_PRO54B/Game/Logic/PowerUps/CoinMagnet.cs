@@ -11,11 +11,11 @@ namespace Game.Logic.PowerUps
     class CoinMagnet : PickedUpPowerUp
     {
         int range, power;
-        public CoinMagnet(int range, int power)
+        public CoinMagnet(int range, int power, int lifeTime)
         {
             this.range = range;
             this.power = power;
-            LifeTime = 600;
+            LifeTime = lifeTime;
         }
 
         public override void Update(List<MapObject> mapObjects, List<Bullet> bullets, Player player, ref int score, int timer, List<PickedUpPowerUp> toRemove)
@@ -36,6 +36,11 @@ namespace Game.Logic.PowerUps
                     }
                 }
             }
+        }
+
+        public static CoinMagnet Copy(CoinMagnet toCopy)
+        {
+            return new CoinMagnet(toCopy.range, toCopy.power, toCopy.LifeTime);
         }
     }
 }

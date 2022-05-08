@@ -36,10 +36,21 @@ namespace Game.Logic
         int timer = 0;
         bool gameOver = false;
 
-        public GameLogic()
+        int level;
+        int coinMagnetLevel;
+        int minigunLevel;
+        int pointMultiplierLevel;
+        int carLevel;
+
+        public GameLogic(int level, int coinMagnetLevel, int minigunLevel, int pointMultiplierLevel, int carLevel)
         {
+            this.level = level;
+            this.coinMagnetLevel = coinMagnetLevel;
+            this.minigunLevel = minigunLevel;
+            this.pointMultiplierLevel = pointMultiplierLevel;
+            this.carLevel = carLevel;
             InitMapObjects();
-            InitPlayer();
+            InitPlayer(this.level, this.carLevel);
             CollisionChecker.Collision += OnCollision;
             MapObjectManager.Init(windowSize);
             PoliceLights.Init(windowSize);
@@ -104,16 +115,28 @@ namespace Game.Logic
                 switch (powerUp.Type)
                 {
                     case PowerUp.PowerUpType.CoinMagnet:
-                        powerUps.Add(new CoinMagnet(100, 5));
+                        powerUps.Add(CoinMagnet.Copy(LevelData.CoinMagnetLevel[coinMagnetLevel]));
                         break;
                     case PowerUp.PowerUpType.BonusHealth:
                         powerUps.Add(new BonusHealth());
                         break;
                     case PowerUp.PowerUpType.Minigun:
-                        powerUps.Add(new Minigun());
+                        Minigun gun = null;
+                        foreach (var p in powerUps)
+                        {
+                            if (p is Minigun)
+                            {
+                                gun = p as Minigun;
+                            }
+                        }
+                        if (gun != null)
+                        {
+                            gun.AddAmmo(LevelData.MinigunLevel[minigunLevel].AmmoCount);
+                        }
+                        powerUps.Add(Minigun.Copy(LevelData.MinigunLevel[minigunLevel]));
                         break;
                     case PowerUp.PowerUpType.PointMultiplier:
-                        PointMultiplier pointMultiplier = new PointMultiplier();
+                        PointMultiplier pointMultiplier = PointMultiplier.Copy(LevelData.PointMultiplierLevel[pointMultiplierLevel]);
                         powerUps.Add(pointMultiplier);
                         CollisionChecker.Collision += pointMultiplier.OnCollision;
                         break;
@@ -178,10 +201,15 @@ namespace Game.Logic
             }
         }
 
-        void InitPlayer()
+        void InitPlayer(int level, int carLevel)
         {
             Player = new Player(
-                new Vector2(200, 450));
+                new Vector2(200, 450),
+                LevelData.StartingSpeeds[level],
+                LevelData.CarLevel[carLevel][1],
+                LevelData.CarLevel[carLevel][0],
+                LevelData.CarLevel[carLevel][2]
+                );
         }
 
         void InitMapObjects()

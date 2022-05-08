@@ -19,18 +19,23 @@ namespace Game.Logic.MapObjects
         public float Speed { get; private set; }
         public Rect Rect { get; private set; }
 
-        const float TURNING_SPEED = 3f;
-        const float SPEED = 2f;
+        float acceleration;
+        float brake;
+        float turningSpeed;
+
         const int MIRROR_WIDTH = 3;
 
-        public Player(Vector2 position)
+        public Player(Vector2 position, float startingSpeed, float acceleration, float brake, float turningSpeed)
             : base(position, 0, 0)
         {
             BitmapImage image = new BitmapImage(new Uri(Path.Combine("Resources", "miata_na_green.png"), UriKind.RelativeOrAbsolute));
             Brush = new ImageBrush(image);
             Widht = (int)image.Width;
             Height = (int)image.Height;
-            Speed = 4f;
+            Speed = startingSpeed;
+            this.acceleration = acceleration;
+            this.brake = brake;
+            this.turningSpeed = turningSpeed;
             Health = 1;
             Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }
@@ -38,7 +43,7 @@ namespace Game.Logic.MapObjects
         public void MoveRight()
         {
             // update position
-            Position += new Vector2(TURNING_SPEED, 0);
+            Position += new Vector2(turningSpeed, 0);
             // update rect
             Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }
@@ -46,7 +51,7 @@ namespace Game.Logic.MapObjects
         public void MoveLeft()
         {
             // update position
-            Position += new Vector2(-TURNING_SPEED, 0);
+            Position += new Vector2(-turningSpeed, 0);
             // update rect
             Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }
@@ -54,7 +59,7 @@ namespace Game.Logic.MapObjects
         public void MoveForward()
         {
             // update position
-            Position += new Vector2(0, -SPEED);
+            Position += new Vector2(0, -acceleration);
             // update rect
             Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }
@@ -62,7 +67,7 @@ namespace Game.Logic.MapObjects
         public void MoveBackward()
         {
             // update position
-            Position += new Vector2(0, SPEED);
+            Position += new Vector2(0, brake);
             // update rect
             Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
         }

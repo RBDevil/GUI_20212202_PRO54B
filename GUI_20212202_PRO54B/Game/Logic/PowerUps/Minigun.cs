@@ -11,28 +11,39 @@ namespace Game.Logic.PowerUps
     class Minigun : PickedUpPowerUp
     {
         int nextShotAvailableTime = 0;
-        int ammoCount;
+        public int AmmoCount { get; private set; }
 
-        const int RELOAD_TIME = 10;
+        int reloadTime;
 
-        public Minigun()
+        public Minigun(int ammoCount, int reloadTime )
         {
-            ammoCount = 15;
+            this.AmmoCount = ammoCount;
+            this.reloadTime = reloadTime;
         }
 
         public override void Update(List<MapObject> mapObjects, List<Bullet> bullets, Player player, ref int score, int timer, List<PickedUpPowerUp> toRemove)
         {
             base.Update(mapObjects, bullets, player, ref score, timer, toRemove);
-            if (Keyboard.IsKeyDown(Key.Space) && nextShotAvailableTime < timer && ammoCount > 0)
+            if (Keyboard.IsKeyDown(Key.Space) && nextShotAvailableTime < timer && AmmoCount > 0)
             {
-                nextShotAvailableTime = timer + RELOAD_TIME;
-                ammoCount--;
+                nextShotAvailableTime = timer + reloadTime;
+                AmmoCount--;
                 bullets.Add(new Bullet(player.Position));
-                if (ammoCount == 0)
+                if (AmmoCount == 0)
                 {
                     toRemove.Add(this);
                 }
             }
+        }
+    
+        public static Minigun Copy(Minigun toCopy)
+        {
+            return new Minigun(toCopy.AmmoCount, toCopy.reloadTime);
+        }
+
+        public void AddAmmo(int ammoCountAtCurrentLevel)
+        {
+            AmmoCount += ammoCountAtCurrentLevel;
         }
     }
 }

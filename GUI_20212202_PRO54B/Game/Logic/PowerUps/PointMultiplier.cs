@@ -11,9 +11,11 @@ namespace Game.Logic.PowerUps
     class PointMultiplier : PickedUpPowerUp
     {
         int points = 0;
-        public PointMultiplier()
+        int multiplier;
+        public PointMultiplier(int multiplier, int lifeTime)
         {
-            LifeTime = 600;
+            this.multiplier = multiplier;
+            LifeTime = lifeTime;
         }
 
         public void OnCollision(CollisionEventArgs eargs) 
@@ -21,7 +23,7 @@ namespace Game.Logic.PowerUps
             Coin coin = eargs.CollisionWith as Coin;
             if (coin != null)
             {
-                points += coin.Value;
+                points += multiplier * coin.Value;
             }
         }
 
@@ -30,6 +32,11 @@ namespace Game.Logic.PowerUps
             base.Update(mapObjects, bullets, player, ref score, timer, toRemove);
             score += points;
             points = 0;
+        }
+    
+        public static PointMultiplier Copy(PointMultiplier toCopy)
+        {
+            return new PointMultiplier(toCopy.multiplier, toCopy.LifeTime);
         }
     }  
 }
