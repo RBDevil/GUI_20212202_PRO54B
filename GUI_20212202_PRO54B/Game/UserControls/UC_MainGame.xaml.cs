@@ -1,5 +1,5 @@
 ﻿using Game.Logic;
-using Game.UserControls;
+using Game.Renderer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,38 +16,34 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace Game
+namespace Game.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UC_MainGame.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UC_MainGame : UserControl
     {
         GameLogic logic;
-
-        public MainWindow()
+        public UC_MainGame()
         {
-            Content = new UC_MainMenu();
             InitializeComponent();
-            window.ResizeMode = ResizeMode.NoResize;
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            logic = new GameLogic(PlayerData.Level, PlayerData.CoinMagnetLevel, PlayerData.MinigunLevel,
-                PlayerData.PointMultiplierLevel, PlayerData.CarLevel, false);
-            display.SetupLogic(logic);
-
-            DispatcherTimer dt = new DispatcherTimer();
-            dt.Interval = TimeSpan.FromMilliseconds(1000 / 60);
-            dt.Tick += Dt_Tick;
-            dt.Start();
         }
 
         private void Dt_Tick(object sender, EventArgs e)
         {
             logic.Update();
-            display.InvalidateVisual();
+            MG_display.InvalidateVisual();
+        }
+
+        private void MainGameWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            logic = new GameLogic();
+            MG_display.SetupLogic(logic);
+
+            DispatcherTimer dt = new DispatcherTimer();
+            dt.Interval = TimeSpan.FromMilliseconds(1000 / 60);
+            dt.Tick += Dt_Tick;
+            dt.Start();
         }
     }
 }
