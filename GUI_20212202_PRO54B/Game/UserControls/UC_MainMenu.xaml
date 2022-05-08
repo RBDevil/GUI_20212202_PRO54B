@@ -6,24 +6,10 @@
              xmlns:local="clr-namespace:Game"
              xmlns:renderer="clr-namespace:Game.Renderer"
              mc:Ignorable="d" 
-             Height="600" Width="600"
+             Height="600" Width="500"
              Loaded="Window_Loaded"
              x:Name="window">
     <Grid Background="Black">
-        <renderer:Display x:Name="display" />
-
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>-->
-        
         <Button Content="Play" Grid.Row="0" Grid.Column="1" Click="btn_Play_Click" />
-        <!--<Button Content="Exit" Grid.Row="2" Grid.Column="1" Click="btn_Exit_Click" />-->
     </Grid>
 </UserControl>

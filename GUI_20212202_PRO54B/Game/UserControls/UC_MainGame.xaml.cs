@@ -51,6 +51,7 @@ namespace Game.UserControls
         private void OnGameOver(int score)
         {
             PlayerData.Score += score;
+            Content = new InterLevelMenu();
         }
     }
 }
