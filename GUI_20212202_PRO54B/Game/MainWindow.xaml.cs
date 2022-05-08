@@ -46,5 +46,18 @@ namespace Game
             logic.Update();
             display.InvalidateVisual();
         }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Right:
+                    logic.Player.MoveRight();
+                    break;
+                case Key.Left:
+                    logic.Player.MoveLeft();
+                    break;
+            }
+        }
     }
 }
