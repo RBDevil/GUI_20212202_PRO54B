@@ -18,6 +18,8 @@ namespace Game.Logic
 {
     class GameLogic : IGameLogic
     {
+        Size windowSize = new Size(600, 600);
+
         public delegate void GameEventHandler();
         public event GameEventHandler GameOver;
 
@@ -34,7 +36,7 @@ namespace Game.Logic
         int timer = 0;
         bool gameOver = false;
 
-        public GameLogic(Size windowSize)
+        public GameLogic()
         {
             InitMapObjects();
             InitPlayer();
