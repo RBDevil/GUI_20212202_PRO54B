@@ -1,4 +1,5 @@
 ﻿using Game.Logic;
+using Game.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace Game
 
         public MainWindow()
         {
+            Content = new UC_MainMenu();
             InitializeComponent();
             window.ResizeMode = ResizeMode.NoResize;
         }
