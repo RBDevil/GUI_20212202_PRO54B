@@ -22,7 +22,7 @@ namespace Game.Logic
 
         Size windowSize = new Size(500, 600);
 
-        public delegate void GameEventHandler();
+        public delegate void GameEventHandler(int score);
         public event GameEventHandler GameOver;
 
         public const int SCORE_PER_SECOND = 1;
@@ -158,7 +158,7 @@ namespace Game.Logic
             else
             {
                 gameOver = true;
-                GameOver?.Invoke();
+                GameOver?.Invoke(score);
             }
         }
 

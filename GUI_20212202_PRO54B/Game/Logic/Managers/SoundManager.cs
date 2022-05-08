@@ -40,7 +40,7 @@ namespace Game.Logic.Managers
             }
         }
 
-        public static void StopMusic()
+        public static void StopMusic(int score)
         {
             backgroundSong.Stop();
         }

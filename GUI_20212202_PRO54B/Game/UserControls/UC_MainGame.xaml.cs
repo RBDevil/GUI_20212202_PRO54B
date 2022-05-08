@@ -37,13 +37,20 @@ namespace Game.UserControls
 
         private void MainGameWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            logic = new GameLogic();
+            logic = new GameLogic(PlayerData.Level, PlayerData.CoinMagnetLevel, PlayerData.MinigunLevel,
+                PlayerData.PointMultiplierLevel, PlayerData.CarLevel, false);
+            logic.GameOver += OnGameOver;
             MG_display.SetupLogic(logic);
 
             DispatcherTimer dt = new DispatcherTimer();
             dt.Interval = TimeSpan.FromMilliseconds(1000 / 60);
             dt.Tick += Dt_Tick;
             dt.Start();
+        }
+
+        private void OnGameOver(int score)
+        {
+            PlayerData.Score += score;
         }
     }
 }

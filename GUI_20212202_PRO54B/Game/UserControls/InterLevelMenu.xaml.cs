@@ -1,6 +1,4 @@
-﻿using Game.Logic;
-using Game.UserControls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,20 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 
-namespace Game
+namespace Game.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for InterLevelMenu.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class InterLevelMenu : UserControl
     {
-        public MainWindow()
+        public InterLevelMenu()
         {
             InitializeComponent();
-            Content = new UC_MainMenu();
-            window.ResizeMode = ResizeMode.NoResize;
         }
     }
 }
