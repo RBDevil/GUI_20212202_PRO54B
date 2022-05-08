@@ -24,13 +24,9 @@ namespace Game.UserControls
     public partial class UC_MainGame : UserControl
     {
         GameLogic logic;
-
         public UC_MainGame()
         {
-            ;
             InitializeComponent();
-            //Content = new UC_MainMenu();
-            //MainGameWindow.ResizeMode = ResizeMode.NoResize;
         }
 
         private void Dt_Tick(object sender, EventArgs e)
@@ -39,23 +35,9 @@ namespace Game.UserControls
             MG_display.InvalidateVisual();
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.Right:
-                    logic.PlayerControl(Controls.Right);
-                    break;
-                case Key.Left:
-                    logic.PlayerControl(Controls.Left);
-                    break;
-            }
-        }
-
         private void MainGameWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            ;
-            logic = new GameLogic(/*window.RenderSize*/);
+            logic = new GameLogic();
             MG_display.SetupLogic(logic);
 
             DispatcherTimer dt = new DispatcherTimer();

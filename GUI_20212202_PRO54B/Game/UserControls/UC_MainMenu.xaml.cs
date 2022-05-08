@@ -22,7 +22,6 @@ namespace Game.UserControls
     /// </summary>
     public partial class UC_MainMenu : UserControl
     {
-        GameLogic logic;
         public UC_MainMenu()
         {
             InitializeComponent();
@@ -30,42 +29,12 @@ namespace Game.UserControls
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            logic = new GameLogic(/*window.RenderSize*/);
-            display.SetupLogic(logic);
 
-            DispatcherTimer dt = new DispatcherTimer();
-            dt.Interval = TimeSpan.FromMilliseconds(1000 / 60);
-            dt.Tick += Dt_Tick;
-            dt.Start();
-        }
-
-        private void Dt_Tick(object sender, EventArgs e)
-        {
-            //logic.Update();
-            display.InvalidateVisual();
-        }
-
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.Right:
-                    logic.PlayerControl(Controls.Right);
-                    break;
-                case Key.Left:
-                    logic.PlayerControl(Controls.Left);
-                    break;
-            }
         }
 
         private void btn_Play_Click(object sender, RoutedEventArgs e)
         {
             (Parent as Window).Content = new UC_MainGame();
-        }
-
-        private void btn_Exit_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
     }
 }
