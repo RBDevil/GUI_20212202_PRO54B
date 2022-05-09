@@ -23,9 +23,11 @@ namespace Game
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow Window;
         public MainWindow()
         {
             InitializeComponent();
+            Window = window;
             Content = new UC_MainMenu();
             window.ResizeMode = ResizeMode.NoResize;
         }
