@@ -37,7 +37,7 @@ namespace Game.Logic.Managers
                         Collision?.Invoke(new CollisionEventArgs(player, collidableItem));
                     }
                 }
-            }
+            }   
             // check bullet collision
             foreach (var bullet in bullets)
             {

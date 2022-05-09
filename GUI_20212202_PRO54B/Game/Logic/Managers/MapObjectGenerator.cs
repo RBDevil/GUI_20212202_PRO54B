@@ -31,7 +31,7 @@ namespace Game.Logic.Managers
                 if (num > 20)
                 {
                     mapObjects.Add(new Car(
-                        new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)),
+                        new Vector2(rnd.Next(0, (int)windowSize.Width - 70), rnd.Next(-100 - SPREAD, -100)),
                         rnd.Next(MIN_WIDHT, MAX_WIDHT),
                         rnd.Next(MIN_HEIGHT, MAX_HEIGHT),
                         rnd.Next(1, 4)));
@@ -39,7 +39,7 @@ namespace Game.Logic.Managers
                 else if (num > 13)
                 {
                     mapObjects.Add(new SlowCar(
-                       new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)),
+                       new Vector2(rnd.Next(0, (int)windowSize.Width - 80), rnd.Next(-100 - SPREAD, -100)),
                        rnd.Next(MIN_WIDHT, MAX_WIDHT),
                        rnd.Next(MIN_HEIGHT, MAX_HEIGHT),
                        rnd.Next(1, 4)));
@@ -47,7 +47,7 @@ namespace Game.Logic.Managers
                 else if (num > 5)
                 {
                     int Y = rnd.Next(-100 - SPREAD, -100);
-                    int X = rnd.Next(0, (int)windowSize.Width);
+                    int X = rnd.Next(0, (int)windowSize.Width - 20);
                     for (int j = 0; j < rnd.Next(3,5); j++)
                     {
                         mapObjects.Add(new Coin(new Vector2(X, Y - j * 100)));
@@ -56,21 +56,21 @@ namespace Game.Logic.Managers
                 else
                 {
                     int num2 = rnd.Next(0, 100);
-                    if (num2 < 10)
+                    if (num2 < 100)//10
                     {
-                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.BonusHealth));
+                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width - 40), rnd.Next(-100 - SPREAD, -100)), PowerUpType.BonusHealth));
                     }
-                    else if (num2 < 43)
+                    else if (num2 < 43) //43
                     {
-                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.CoinMagnet));
+                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width - 40), rnd.Next(-100 - SPREAD, -100)), PowerUpType.CoinMagnet));
                     }
-                    else if (num2 < 76)
+                    else if (num2 < 76) //76
                     {
-                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.PointMultiplier));
+                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width - 40), rnd.Next(-100 - SPREAD, -100)), PowerUpType.PointMultiplier));
                     }
                     else
                     {
-                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width), rnd.Next(-100 - SPREAD, -100)), PowerUpType.Minigun));
+                        mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width - 40), rnd.Next(-100 - SPREAD, -100)), PowerUpType.Minigun));
                     }
                 }
             }

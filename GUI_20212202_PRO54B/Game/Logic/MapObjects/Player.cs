@@ -46,18 +46,24 @@ namespace Game.Logic.MapObjects
 
         public void MoveRight()
         {
-            // update position
-            Position += new Vector2(turningSpeed, 0);
-            // update rect
-            Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
+            if (Position.X < 438)
+            {
+                // update position
+                Position += new Vector2(turningSpeed, 0);
+                // update rect
+                Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
+            }
         }
 
         public void MoveLeft()
         {
-            // update position
-            Position += new Vector2(-turningSpeed, 0);
-            // update rect
-            Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
+            if (Position.X > -4)
+            {
+                // update position
+                Position += new Vector2(-turningSpeed, 0);
+                // update rect
+                Rect = new Rect(Position.X + MIRROR_WIDTH, Position.Y, Widht - MIRROR_WIDTH * 2, Height);
+            }
         }
 
         public void MoveForward()
@@ -87,19 +93,19 @@ namespace Game.Logic.MapObjects
         {
             Brush = texture;
             // do NOT call base method
-            if (Keyboard.IsKeyDown(Key.D))
+            if (Keyboard.IsKeyDown(Key.Right))
             {
                 MoveRight();
             }
-            if (Keyboard.IsKeyDown(Key.A))
+            if (Keyboard.IsKeyDown(Key.Left))
             {
                 MoveLeft();
             }
-            if (Keyboard.IsKeyDown(Key.W))
+            if (Keyboard.IsKeyDown(Key.Up))
             {
                 MoveForward();
             }
-            if (Keyboard.IsKeyDown(Key.S))
+            if (Keyboard.IsKeyDown(Key.Down))
             {
                 MoveBackward();
             }

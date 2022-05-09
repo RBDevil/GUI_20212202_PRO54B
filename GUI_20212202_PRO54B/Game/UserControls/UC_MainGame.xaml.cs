@@ -38,7 +38,7 @@ namespace Game.UserControls
         private void MainGameWindow_Loaded(object sender, RoutedEventArgs e)
         {
             logic = new GameLogic(PlayerData.Level, PlayerData.CoinMagnetLevel, PlayerData.MinigunLevel,
-                PlayerData.PointMultiplierLevel, PlayerData.CarLevel, true);
+                PlayerData.PointMultiplierLevel, PlayerData.CarLevel, false);
             logic.GameOver += OnGameOver;
             MG_display.SetupLogic(logic);
 
@@ -53,11 +53,11 @@ namespace Game.UserControls
             PlayerData.Score += score;
             if (PlayerData.Level == LevelData.StartingSpeeds.Length - 1)
             {
-                Content = new GameEndMenu();
+                MainWindow.Window.Content = new GameEndMenu();
             }
             else
             {
-                Content = new InterLevelMenu();
+                MainWindow.Window.Content = new InterLevelMenu();
             }
         }
     }

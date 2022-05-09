@@ -20,7 +20,6 @@ namespace Game.Logic.MapObjects
         
         public Bullet(Vector2 position) : base(position, 3, 3)
         {
-            //BitmapImage image = new BitmapImage(new Uri(Path.Combine("Resources", "lada.png"), UriKind.RelativeOrAbsolute));
             Damage = 1;
             Brush = new ImageBrush(new BitmapImage(new Uri(Path.Combine("Resources", "ammo.png"), UriKind.RelativeOrAbsolute)));
         }

@@ -28,7 +28,7 @@ namespace Game.UserControls
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             PlayerData.Level++;
-            Content = new UC_MainGame();
+            MainWindow.Window.Content = new UC_MainGame();
         }
     }
 }

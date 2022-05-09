@@ -34,7 +34,7 @@ namespace Game.UserControls
 
         private void btn_Play_Click(object sender, RoutedEventArgs e)
         {
-            (Parent as Window).Content = new UC_MainGame();
+            MainWindow.Window.Content = new UC_MainGame();
         }
     }
 }

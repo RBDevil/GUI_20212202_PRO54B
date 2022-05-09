@@ -18,6 +18,7 @@
     <None Remove="Resources\lada_brake.png" />
     <None Remove="Resources\lada_red.png" />
     <None Remove="Resources\lada_red_brake.png" />
+    <None Remove="Resources\mainmenu.png" />
     <None Remove="Resources\miata_na_green.png" />
     <None Remove="Resources\miata_na_green_brake.png" />
     <None Remove="Resources\mycoin.png" />
@@ -56,6 +57,9 @@
     <Content Include="Resources\lada_red_brake.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="UserControls\Resources\mainmenu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Resources\miata_na_green.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

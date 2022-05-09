@@ -14,7 +14,7 @@ namespace Game.Logic.MapObjects
     class Background : MapObject
     {
         const int HEIGHT = 600;
-        const int WIDTH = 600;
+        const int WIDTH = 500;
 
         public Background(Vector2 position) : base(position, HEIGHT, WIDTH)
         {

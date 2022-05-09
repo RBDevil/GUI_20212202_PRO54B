@@ -5,6 +5,7 @@ using Game.Renderer;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -33,9 +34,6 @@ namespace Game.Logic
 
         List<PickedUpPowerUp> powerUps = new List<PickedUpPowerUp>();
         List<Bullet> bullets = new List<Bullet>();
-
-        AnimationBrush policeLightsAnimation = new AnimationBrush("PoliceLightsAnimation", 10);
-        const int POLICE_LIGHT_ANIMATION_HEIGHT = 100;
 
         int score = 0;
         int timer = 0;
@@ -132,13 +130,17 @@ namespace Game.Logic
                             if (p is Minigun)
                             {
                                 gun = p as Minigun;
+                                break;
                             }
                         }
                         if (gun != null)
                         {
                             gun.AddAmmo(LevelData.MinigunLevel[minigunLevel].AmmoCount);
                         }
-                        powerUps.Add(Minigun.Copy(LevelData.MinigunLevel[minigunLevel]));
+                        else
+                        {
+                            powerUps.Add(Minigun.Copy(LevelData.MinigunLevel[minigunLevel]));
+                        }
                         break;
                     case PowerUp.PowerUpType.PointMultiplier:
                         PointMultiplier pointMultiplier = PointMultiplier.Copy(LevelData.PointMultiplierLevel[pointMultiplierLevel]);
@@ -159,6 +161,7 @@ namespace Game.Logic
             {
                 gameOver = true;
                 GameOver?.Invoke(score);
+                score = 0;
             }
         }
 
@@ -283,9 +286,45 @@ namespace Game.Logic
             // render player
             Player.Render(drawingContext);
 
-            if (Player.Speed > 3)
+            RenderHud(drawingContext);
+        }
+
+        void RenderHud(DrawingContext drawingContext)
+        {
+            drawingContext.DrawText(new FormattedText("Health: " + Player.Health,
+                CultureInfo.CurrentUICulture,
+                FlowDirection.LeftToRight,
+                new Typeface("Verdana"),
+                25,
+                Brushes.Black),
+                new Point(360,0));
+
+            drawingContext.DrawText(new FormattedText("Score: " + score,
+                CultureInfo.CurrentUICulture,
+                FlowDirection.LeftToRight,
+                new Typeface("Verdana"),
+                25,
+                Brushes.Black),
+                new Point(10, 0));
+
+            Minigun gun = null;
+            foreach (var p in powerUps)
             {
-                policeLightsAnimation.Render(drawingContext, new Vector2(0, (float)windowSize.Height - POLICE_LIGHT_ANIMATION_HEIGHT - 38));
+                if (p is Minigun)
+                {
+                    gun = p as Minigun;
+                    break;
+                }
+            }
+            if (gun != null)
+            {
+                drawingContext.DrawText(new FormattedText("Ammo: " + gun.AmmoCount,
+     CultureInfo.CurrentUICulture,
+     FlowDirection.LeftToRight,
+     new Typeface("Verdana"),
+     25,
+     Brushes.Black),
+     new Point(10, 520));
             }
         }
     }

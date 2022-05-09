@@ -9,7 +9,19 @@
              Height="600" Width="500"
              Loaded="Window_Loaded"
              x:Name="window">
-    <Grid Background="Black">
-        <Button Content="Play" Grid.Row="0" Grid.Column="1" Click="btn_Play_Click" />
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="None" 
+                        ImageSource="Resources/mainmenu.png"
+                        AlignmentX="Center"
+                        AlignmentY="Top"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Play" Grid.Row="1" Click="btn_Play_Click" Height="50" Width="200" Background="#DD6900" FontFamily="Consolas" FontSize="30" Foreground="#192956"/>
     </Grid>
 </UserControl>

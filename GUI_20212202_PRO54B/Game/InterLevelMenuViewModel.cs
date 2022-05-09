@@ -11,6 +11,9 @@ namespace Game
 {
     public class InterLevelMenuViewModel : ObservableRecipient
     {
+        readonly int[] UpgradePrices = { 40, 50, 75 };
+        readonly int[] CarUpgradePrices = { 75, 100, 150 };
+
         public int Score
         {
             get { return PlayerData.Score; }
@@ -74,32 +77,32 @@ namespace Game
         public InterLevelMenuViewModel()
         {
             CoinMagnetUpdateCommand = new RelayCommand(() =>
-                {
-                    Score -= 10;
-                    CoinMagnetLevel++;
-                },
-                () => Score >= 10 && PlayerData.CoinMagnetLevel < LevelData.CoinMagnetLevel.Length - 1);
+            {
+                Score -= UpgradePrices[PlayerData.CoinMagnetLevel];
+                CoinMagnetLevel++;
+            },
+            () => PlayerData.CoinMagnetLevel < LevelData.CoinMagnetLevel.Length - 1 && Score >= UpgradePrices[PlayerData.CoinMagnetLevel]);
 
             MinigunUpdateCommand = new RelayCommand(() =>
             {
-                Score -= 10;
+                Score -= UpgradePrices[PlayerData.MinigunLevel];
                 MinigunLevel++;
             },
-            () => Score >= 10 && PlayerData.MinigunLevel < LevelData.MinigunLevel.Length - 1);
+            () => PlayerData.MinigunLevel < LevelData.MinigunLevel.Length - 1 && Score >= UpgradePrices[PlayerData.MinigunLevel]);
 
             PointMultiplierUpdateCommand = new RelayCommand(() =>
             {
-                Score -= 10;
+                Score -= UpgradePrices[PlayerData.PointMultiplierLevel];
                 PointMultiplierLevel++;
             },
-            () => Score >= 10 && PlayerData.PointMultiplierLevel < LevelData.PointMultiplierLevel.Length - 1);
+            () => PlayerData.PointMultiplierLevel < LevelData.PointMultiplierLevel.Length - 1 && Score >= UpgradePrices[PlayerData.PointMultiplierLevel]);
 
             CarUpdateCommand = new RelayCommand(() =>
             {
-                Score -= 10;
+                Score -= CarUpgradePrices[PlayerData.CarLevel];
                 CarLevel++;
             },
-            () => Score >= 10 && PlayerData.CarLevel < LevelData.CarLevel.Length -1);
+            () => PlayerData.CarLevel < LevelData.CarLevel.Length -1 && Score >= CarUpgradePrices[PlayerData.CarLevel]);
         }
 
     }
