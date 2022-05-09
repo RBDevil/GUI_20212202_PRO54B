@@ -14,17 +14,17 @@ namespace Game
         // range, power, lifetime
         public static readonly CoinMagnet[] CoinMagnetLevel = new CoinMagnet[]
         {
-            new CoinMagnet(100, 5, 600),
-            new CoinMagnet(150, 5, 600),
-            new CoinMagnet(150, 7, 600),
-            new CoinMagnet(150, 7, 900)
+            new CoinMagnet(100, 8, 600),
+            new CoinMagnet(150, 12, 600),
+            new CoinMagnet(150, 15, 600),
+            new CoinMagnet(150, 15, 900)
         };
 
         public static readonly Minigun[] MinigunLevel = new Minigun[]
         {
-            new Minigun(15, 10),
-            new Minigun(25, 10),
-            new Minigun(25, 6)
+            new Minigun(10, 10),
+            new Minigun(12, 7),
+            new Minigun(15, 4)
         };
 
         public static readonly PointMultiplier[] PointMultiplierLevel = new PointMultiplier[]

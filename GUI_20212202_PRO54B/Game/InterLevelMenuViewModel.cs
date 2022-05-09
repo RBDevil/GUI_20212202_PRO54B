@@ -11,8 +11,8 @@ namespace Game
 {
     public class InterLevelMenuViewModel : ObservableRecipient
     {
-        readonly int[] UpgradePrices = { 40, 50, 75 };
-        readonly int[] CarUpgradePrices = { 75, 100, 150 };
+        readonly int[] UpgradePrices = { 30, 40, 50 };
+        readonly int[] CarUpgradePrices = { 50, 70, 90 };
 
         public int Score
         {
@@ -68,6 +68,62 @@ namespace Game
             }
         }
 
+        int coinMagnetPrice;
+        public int CoinMagnetPrice
+        {
+            get 
+            {
+                return UpgradePrices[CoinMagnetLevel]; 
+            }
+            set
+            {
+                SetProperty(ref coinMagnetPrice, value);
+                (CoinMagnetUpdateCommand as RelayCommand).NotifyCanExecuteChanged();
+            }
+        }
+
+        int minigunPrice;
+        public int MinigunPrice
+        {
+            get
+            {
+                return UpgradePrices[MinigunLevel];
+            }
+            set
+            {
+                SetProperty(ref minigunPrice, value);
+                (MinigunUpdateCommand as RelayCommand).NotifyCanExecuteChanged();
+            }
+        }
+
+        int pointMultiplierPrice;
+        public int PointMultiplierPrice
+        {
+            get
+            {
+                return UpgradePrices[PointMultiplierLevel];
+            }
+            set
+            {
+                SetProperty(ref pointMultiplierPrice, value);
+                (PointMultiplierUpdateCommand as RelayCommand).NotifyCanExecuteChanged();
+            }
+        }
+
+        int carPrice;
+        public int CarPrice
+        {
+            get
+            {
+                return CarUpgradePrices[CarLevel];
+            }
+            set
+            {
+                SetProperty(ref carPrice, value);
+                (CarUpdateCommand as RelayCommand).NotifyCanExecuteChanged();
+            }
+        }
+
         public ICommand CoinMagnetUpdateCommand { get; set; }
         public ICommand MinigunUpdateCommand { get; set; }
         public ICommand PointMultiplierUpdateCommand { get; set; }
@@ -80,6 +136,7 @@ namespace Game
             {
                 Score -= UpgradePrices[PlayerData.CoinMagnetLevel];
                 CoinMagnetLevel++;
+                CoinMagnetPrice = UpgradePrices[CoinMagnetLevel];
             },
             () => PlayerData.CoinMagnetLevel < LevelData.CoinMagnetLevel.Length - 1 && Score >= UpgradePrices[PlayerData.CoinMagnetLevel]);
 
@@ -87,6 +144,7 @@ namespace Game
             {
                 Score -= UpgradePrices[PlayerData.MinigunLevel];
                 MinigunLevel++;
+                MinigunPrice = UpgradePrices[MinigunLevel];
             },
             () => PlayerData.MinigunLevel < LevelData.MinigunLevel.Length - 1 && Score >= UpgradePrices[PlayerData.MinigunLevel]);
 
@@ -94,6 +152,7 @@ namespace Game
             {
                 Score -= UpgradePrices[PlayerData.PointMultiplierLevel];
                 PointMultiplierLevel++;
+                PointMultiplierPrice = UpgradePrices[PointMultiplierLevel];
             },
             () => PlayerData.PointMultiplierLevel < LevelData.PointMultiplierLevel.Length - 1 && Score >= UpgradePrices[PlayerData.PointMultiplierLevel]);
 
@@ -101,6 +160,7 @@ namespace Game
             {
                 Score -= CarUpgradePrices[PlayerData.CarLevel];
                 CarLevel++;
+                CarPrice = CarUpgradePrices[CarLevel];
             },
             () => PlayerData.CarLevel < LevelData.CarLevel.Length -1 && Score >= CarUpgradePrices[PlayerData.CarLevel]);
         }

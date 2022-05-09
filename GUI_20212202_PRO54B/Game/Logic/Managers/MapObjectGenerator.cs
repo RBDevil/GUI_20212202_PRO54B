@@ -36,7 +36,7 @@ namespace Game.Logic.Managers
                         rnd.Next(MIN_HEIGHT, MAX_HEIGHT),
                         rnd.Next(1, 4)));
                 }
-                else if (num > 13)
+                else if (num > 14)
                 {
                     mapObjects.Add(new SlowCar(
                        new Vector2(rnd.Next(0, (int)windowSize.Width - 80), rnd.Next(-100 - SPREAD, -100)),
@@ -44,7 +44,7 @@ namespace Game.Logic.Managers
                        rnd.Next(MIN_HEIGHT, MAX_HEIGHT),
                        rnd.Next(1, 4)));
                 }
-                else if (num > 5)
+                else if (num > 4)
                 {
                     int Y = rnd.Next(-100 - SPREAD, -100);
                     int X = rnd.Next(0, (int)windowSize.Width - 20);
@@ -56,7 +56,7 @@ namespace Game.Logic.Managers
                 else
                 {
                     int num2 = rnd.Next(0, 100);
-                    if (num2 < 100)//10
+                    if (num2 < 10)//10
                     {
                         mapObjects.Add(new PowerUp(new Vector2(rnd.Next(0, (int)windowSize.Width - 40), rnd.Next(-100 - SPREAD, -100)), PowerUpType.BonusHealth));
                     }

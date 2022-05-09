@@ -93,8 +93,6 @@ namespace Game.Logic
                 if (timer % 60 == 0)
                     score += SCORE_PER_SECOND;
 
-                Debug.WriteLine("Score: " + score + " Health: " + Player.Health);
-
                 if (timer % 200 == 0)
                     Player.SpeedUp(0.1f);
             }
@@ -156,10 +154,13 @@ namespace Game.Logic
             {
                 Player.Health--;
                 Player.CollisionDisabledUntil = timer + 120;
+                Debug.WriteLine("Health lost");
             }
             else
             {
                 gameOver = true;
+                Debug.WriteLine("Game over, score: " + score);
+                CollisionChecker.Collision -= OnCollision;
                 GameOver?.Invoke(score);
                 score = 0;
             }
